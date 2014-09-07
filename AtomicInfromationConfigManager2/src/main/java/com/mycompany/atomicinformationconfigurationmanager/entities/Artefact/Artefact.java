@@ -21,6 +21,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -93,9 +94,9 @@ public class Artefact extends BaseEntity implements Serializable, Cloneable{
     @Size(min = 1, max = 45)
     @Column(name = "ArtefactFilename")
     private String artefactFilename;
-
-    @Transient
-    private OdfDocument odfDocument;
+    @Lob
+    @Column(name = "ArtefactFile")
+    private byte[] artefactFile;
 
     public Artefact() {
     }
@@ -112,6 +113,14 @@ public class Artefact extends BaseEntity implements Serializable, Cloneable{
         this.artefactName = artefactName;
         this.artefactMajorVersionNumber = artefactMajorVersionNumber;
         this.artefactMinorVersionNumber = artefactMinorVersionNumber;
+    }
+
+    public byte[] getArtefactFile() {
+        return artefactFile;
+    }
+
+    public void setArtefactFile(byte[] artefactFile) {
+        this.artefactFile = artefactFile;
     }
     
     public String getArtefactFilename() {
@@ -161,14 +170,6 @@ public class Artefact extends BaseEntity implements Serializable, Cloneable{
 
     public void setProjectID(Project projectID) {
         this.projectID = projectID;
-    }
-    
-    public OdfDocument getOdfDocument() {
-        return odfDocument;
-    }
-
-    public void setOdfDocument(OdfDocument odfDocument) {
-        this.odfDocument = odfDocument;
     }
 
     @Override

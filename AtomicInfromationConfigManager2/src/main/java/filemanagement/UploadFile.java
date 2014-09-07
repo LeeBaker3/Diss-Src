@@ -15,13 +15,7 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.Part;
-import sun.util.calendar.ZoneInfoFile;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import org.odftoolkit.odfdom.doc.OdfDocument;
 import org.odftoolkit.simple.TextDocument;
-import org.odftoolkit.simple.common.navigation.TextDocumentSelection;
  
 
 /**
@@ -64,6 +58,7 @@ public class UploadFile {
         inputStream.close();
         
         artefactController.getCurrent().setArtefactFilename(getFilename(file));
+        artefactController.getCurrent().setArtefactFile(buffer);
         artefactController.update();
         
         return "Success";
@@ -71,21 +66,16 @@ public class UploadFile {
 
     public String uploadODF() throws IOException{
         try {
-            InputStream inputStream = file.getInputStream();
-            FileOutputStream outputStream = new FileOutputStream(oldDocument);
-            TextDocument newTextDocument;
             TextDocument oldDocument = TextDocument.newTextDocument();
-
-            oldDocument = TextDocument.loadDocument(inputStream);
-            oldDocument.addParagraph("New text added");
-            oldDocument.save(outputFile);
+//            InputStream inputStream = file.getInputStream();
+//            oldDocument = TextDocument.loadDocument(inputStream);
+//            oldDocument.addParagraph("New text added");
+//            oldDocument.save("C:\\Users\\Lee Baker\\Desktop\\TestFileUpdate.odt");
             // TO Be completed out
         } catch (Exception e) {
             
         }
-        
-        
-        return "To Do";
+        return "Success";
     }
     
     
