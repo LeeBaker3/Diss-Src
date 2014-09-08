@@ -100,6 +100,12 @@
                                 </f:facet>
                                 <h:outputText value="#{item.projectID.projectName} #{item.projectID.projectReference}"/>
                             </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListArtefactTitle_artefactFilename}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.artefactFilename}"/>
+                            </h:column>
                         </h:dataTable>
                     </h:panelGroup>
                 </rich:panel>

@@ -40,6 +40,8 @@
                         <h:inputText id="artefactMajorVersionNumber" value="#{artefactController.selected.artefactMajorVersionNumber}" title="#{bundle.CreateArtefactTitle_artefactMajorVersionNumber}" required="true" requiredMessage="#{bundle.CreateArtefactRequiredMessage_artefactMajorVersionNumber}"/>
                         <h:outputLabel value="#{bundle.CreateArtefactLabel_artefactMinorVersionNumber}" for="artefactMinorVersionNumber" />
                         <h:inputText id="artefactMinorVersionNumber" value="#{artefactController.selected.artefactMinorVersionNumber}" title="#{bundle.CreateArtefactTitle_artefactMinorVersionNumber}" required="true" requiredMessage="#{bundle.CreateArtefactRequiredMessage_artefactMinorVersionNumber}"/>
+                        <h:outputLabel value="#{bundle.CreateArtefactLabel_filename}" for="artefactFilename"/>
+                        <h:outputLabel value="#{bundle.CreateArtefactLabel_filename_Message}"/>
                     </h:panelGrid>
                 </rich:panel>
             </h:form>
