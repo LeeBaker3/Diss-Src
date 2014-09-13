@@ -60,4 +60,12 @@ public class AtomicinformationSaveRetrieve extends BaseSaveRetrieveAbstract<Atom
         List<Atomicinformation> results = query.getResultList();
         return results.size();
     }
+    
+    public List<Atomicinformation> findByEntityActiveAndProjectID(Boolean entityActive, Project project){
+        TypedQuery<Atomicinformation> query = em.createNamedQuery("Atomicinformation.findByEntityActiveAndProjectID", Atomicinformation.class);
+        query.setParameter("entityActive", entityActive);
+        query.setParameter("projectID", project);
+        List<Atomicinformation> results = query.getResultList();
+        return results;
+    }
 }

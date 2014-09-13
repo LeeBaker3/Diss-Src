@@ -31,7 +31,6 @@ public class UploadFile {
     private ArtefactController artefactController;
     
     private Part file;
-    private File outputFile;
 
     public Part getFile() {
         return file;
@@ -74,7 +73,6 @@ public class UploadFile {
                 artefactController.getCurrent().setArtefactFilename(getFilename(file));
                 artefactController.getCurrent().setArtefactFile(buffer);
                 artefactController.update();
-                uploadODF();
                 JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("ArtefactUpload"));
                 return "Success";
             }
@@ -84,21 +82,6 @@ public class UploadFile {
         }
     }
 
-    public String uploadODF() throws IOException{
-        try {
-            TextDocument oldDocument = TextDocument.newTextDocument();
-            InputStream inputStream = file.getInputStream();
-            oldDocument = TextDocument.loadDocument(inputStream);
-            oldDocument.addParagraph("New text added");
-            oldDocument.save("C:\\Users\\Lee Baker\\Desktop\\TestFileUpdate.odt");
-            // TO Be completed out
-        } catch (Exception e) {
-            
-        }
-        return "Success";
-    }
-    
-    
     private static String getFilename(Part part){
         for (String cd : part.getHeader("content-disposition").split(";")){
             if (cd.trim().startsWith("filename")){

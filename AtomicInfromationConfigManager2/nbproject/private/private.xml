@@ -14,8 +14,9 @@
         <group>
             <file>file:/C:/Users/Lee%20Baker/Documents/MSc/Diss-Src/AtomicInfromationConfigManager2/src/main/webapp/Faces/artefactdistribution/CreateFromArtefact.xhtml</file>
             <file>file:/C:/Users/Lee%20Baker/Documents/MSc/Diss-Src/AtomicInfromationConfigManager2/src/main/java/filemanagement/DownloadFile.java</file>
-            <file>file:/C:/Users/Lee%20Baker/Documents/MSc/Diss-Src/AtomicInfromationConfigManager2/src/main/java/com/mycompany/atomicinformationconfigurationmanager/entities/base/BaseSaveRetrieveAbstract.java</file>
             <file>file:/C:/Users/Lee%20Baker/Documents/MSc/Diss-Src/AtomicInfromationConfigManager2/src/main/java/com/mycompany/atomicinformationconfigurationmanager/entities/Artefactatomicinformation/ArtefactatomicinformationController.java</file>
+            <file>file:/C:/Users/Lee%20Baker/Documents/MSc/Diss-Src/AtomicInfromationConfigManager2/src/main/java/com/mycompany/atomicinformationconfigurationmanager/entities/Artefact/Artefact.java</file>
+            <file>file:/C:/Users/Lee%20Baker/Documents/MSc/Diss-Src/AtomicInfromationConfigManager2/src/main/java/com/mycompany/atomicinformationconfigurationmanager/entities/Artefactatomicinformation/ArtefactatomicinformationSaveRetrieve.java</file>
             <file>file:/C:/Users/Lee%20Baker/Documents/MSc/Diss-Src/AtomicInfromationConfigManager2/src/main/webapp/Faces/artefact/Edit.xhtml</file>
             <file>file:/C:/Users/Lee%20Baker/Documents/MSc/Diss-Src/AtomicInfromationConfigManager2/src/main/java/com/mycompany/atomicinformationconfigurationmanager/businessrules/UpdateArtefactAtomicInformationLinks.java</file>
             <file>file:/C:/Users/Lee%20Baker/Documents/MSc/Diss-Src/AtomicInfromationConfigManager2/src/main/java/com/mycompany/atomicinformationconfigurationmanager/entities/Artefact/ArtefactController.java</file>
