@@ -19,6 +19,7 @@ import com.sun.xml.bind.v2.TODO;
 import java.util.List;
 import java.util.ResourceBundle;
 import javax.inject.Inject;
+import org.apache.commons.lang3.StringUtils;
 
 abstract public class Scan {
 
@@ -41,10 +42,10 @@ abstract public class Scan {
             artefact = artefactController.getCurrent();
             if (artefact.getArtefactFile()!= null){
                project = selectedProject.getProject();
-                listAtomicInfoAll = saveRetrieve.findByEntityActiveAndProjectID(true, project);
-                listAtomicInfoFound = scan(artefact, listAtomicInfoAll);
-                createArtefactAtomicInfoRecords.CreateInfoRecords(listAtomicInfoAll, artefact); 
-                return listAtomicInfoFound;
+               listAtomicInfoAll = saveRetrieve.findByEntityActiveAndProjectID(true, project);
+               listAtomicInfoFound = scan(artefact, listAtomicInfoAll);
+               createArtefactAtomicInfoRecords.CreateInfoRecords(listAtomicInfoAll, artefact); 
+               return listAtomicInfoFound;
             }
         else{
             throw new Exception("No document available or selected to scan");
@@ -56,4 +57,14 @@ abstract public class Scan {
     }
     
     abstract public List<Atomicinformation> scan (Artefact artefact, List<Atomicinformation> projectAtomicinfo);
+    
+    protected String cleanString(String dirtySrString){
+       String cleanString;
+       cleanString = StringUtils.lowerCase(dirtySrString);
+       cleanString = StringUtils.deleteWhitespace(cleanString);
+       cleanString = StringUtils.stripAccents(cleanString);
+       return cleanString;
+    }
+    
+    
 }
