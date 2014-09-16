@@ -8,6 +8,7 @@ package filemanagement;
 
 import com.mycompany.atomicinformationconfigurationmanager.entities.Artefact.ArtefactController;
 import com.mycompany.atomicinformationconfigurationmanager.entities.util.JsfUtil;
+import java.io.ByteArrayInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -40,10 +41,13 @@ public class UploadFile {
         this.file = file;
     }
     
+    
+    
     public String upload() throws IOException{   
     try {
             InputStream inputStream = file.getInputStream();
             FileOutputStream outputStream = new FileOutputStream(getFilename(file));
+         
             Long fileSizeLong;
             fileSizeLong = file.getSize();
 
@@ -67,12 +71,14 @@ public class UploadFile {
                         break;
                     }  
                 }
+                
                 outputStream.close();
                 inputStream.close();
 
                 artefactController.getCurrent().setArtefactFilename(getFilename(file));
                 artefactController.getCurrent().setArtefactFile(buffer);
                 artefactController.update();
+                outputFileStream();
                 JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("ArtefactUpload"));
                 return "Success";
             }
@@ -90,6 +96,29 @@ public class UploadFile {
             }
         }
         return null;
+    }
+    
+    private void outputFilePart() throws IOException{
+        try {
+            TextDocument oldDocument;
+            InputStream inputStream = file.getInputStream();
+            oldDocument = TextDocument.loadDocument(inputStream);
+            oldDocument.addParagraph("New text added for File Part Test");
+            oldDocument.save("C:\\Users\\Lee Baker\\Desktop\\TestFileUpdatePart.odt");  
+        } catch (Exception e) {
+        }
+    }
+    
+    private void outputFileStream() throws IOException{
+        try {
+            byte[] bytes = artefactController.getCurrent().getArtefactFile();
+            ByteArrayInputStream in = new ByteArrayInputStream(bytes);
+            TextDocument oldDocument;
+            oldDocument = TextDocument.loadDocument(in);
+            oldDocument.addParagraph("New text added for File Stream Test");
+            oldDocument.save("C:\\Users\\Lee Baker\\Desktop\\TestFileUpdateStream.odt");  
+        } catch (Exception e) {
+        }
     }
 
 }

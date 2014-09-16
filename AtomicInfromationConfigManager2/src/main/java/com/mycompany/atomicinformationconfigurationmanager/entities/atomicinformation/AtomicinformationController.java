@@ -95,7 +95,7 @@ public class AtomicinformationController extends BaseController implements Seria
         }
     }
 
-    private AtomicinformationSaveRetrieve getSaveRetrieve() {
+    public AtomicinformationSaveRetrieve getSaveRetrieve() {
         return ejbSaveRetrieve;
     }
 

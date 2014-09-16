@@ -13,13 +13,17 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/Lee%20Baker/Documents/MSc/Diss-Src/AtomicInfromationConfigManager2/src/main/java/filemanagement/UploadFile.java</file>
+            <file>file:/C:/Users/Lee%20Baker/Documents/MSc/Diss-Src/AtomicInfromationConfigManager2/src/main/webapp/Faces/artefact/View.xhtml</file>
             <file>file:/C:/Users/Lee%20Baker/Documents/MSc/Diss-Src/AtomicInfromationConfigManager2/src/main/java/filemanagement/DownloadFile.java</file>
             <file>file:/C:/Users/Lee%20Baker/Documents/MSc/Diss-Src/AtomicInfromationConfigManager2/src/main/java/com/mycompany/atomicinformationconfigurationmanager/entities/base/BaseSaveRetrieveAbstract.java</file>
             <file>file:/C:/Users/Lee%20Baker/Documents/MSc/Diss-Src/AtomicInfromationConfigManager2/src/main/java/com/mycompany/atomicinformationconfigurationmanager/entities/util/JsfUtil.java</file>
+            <file>file:/C:/Users/Lee%20Baker/Documents/MSc/Diss-Src/AtomicInfromationConfigManager2/src/main/java/com/mycompany/atomicinformationconfigurationmanager/entities/atomicinformation/AtomicinformationSaveRetrieve.java</file>
             <file>file:/C:/Users/Lee%20Baker/Documents/MSc/Diss-Src/AtomicInfromationConfigManager2/src/main/java/scan/Scan.java</file>
-            <file>file:/C:/Users/Lee%20Baker/Documents/MSc/Diss-Src/AtomicInfromationConfigManager2/src/main/java/scan/CreateArtefactAtomicInfoRecords.java</file>
-            <file>file:/C:/Users/Lee%20Baker/Documents/MSc/Diss-Src/AtomicInfromationConfigManager2/src/main/java/com/mycompany/atomicinformationconfigurationmanager/entities/base/BaseSaveRetrieve.java</file>
-            <file>file:/C:/Users/Lee%20Baker/Documents/MSc/Diss-Src/AtomicInfromationConfigManager2/src/main/java/com/mycompany/atomicinformationconfigurationmanager/entities/Artefact/ArtefactController.java</file>
+            <file>file:/C:/Users/Lee%20Baker/Documents/MSc/Diss-Src/AtomicInfromationConfigManager2/src/main/webapp/Faces/atomicinformation/List.xhtml</file>
+            <file>file:/C:/Users/Lee%20Baker/Documents/MSc/Diss-Src/AtomicInfromationConfigManager2/src/main/java/com/mycompany/atomicinformationconfigurationmanager/entities/atomicinformation/Atomicinformation.java</file>
+            <file>file:/C:/Users/Lee%20Baker/Documents/MSc/Diss-Src/AtomicInfromationConfigManager2/src/main/java/com/mycompany/atomicinformationconfigurationmanager/entities/Artefact/Artefact.java</file>
+            <file>file:/C:/Users/Lee%20Baker/Documents/MSc/Diss-Src/AtomicInfromationConfigManager2/src/main/java/com/mycompany/atomicinformationconfigurationmanager/entities/atomicinformation/AtomicinformationController.java</file>
+            <file>file:/C:/Users/Lee%20Baker/Documents/MSc/Diss-Src/AtomicInfromationConfigManager2/src/main/java/com/mycompany/atomicinformationconfigurationmanager/entities/util/PaginationHelper.java</file>
             <file>file:/C:/Users/Lee%20Baker/Documents/MSc/Diss-Src/AtomicInfromationConfigManager2/src/main/java/scan/ScanOdt.java</file>
         </group>
     </open-files>

@@ -16,10 +16,14 @@ import com.mycompany.atomicinformationconfigurationmanager.entities.atomicinform
 import com.mycompany.atomicinformationconfigurationmanager.entities.project.Project;
 import com.mycompany.atomicinformationconfigurationmanager.entities.util.JsfUtil;
 import com.sun.xml.bind.v2.TODO;
+import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.ResourceBundle;
+import javax.ejb.Stateless;
 import javax.inject.Inject;
+import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.ini4j.InvalidFileFormatException;
 
 abstract public class Scan {
 
@@ -29,32 +33,40 @@ abstract public class Scan {
     private ArtefactController artefactController;
     @Inject
     private SelectedProject selectedProject;
-    private AtomicinformationSaveRetrieve saveRetrieve = new AtomicinformationSaveRetrieve();
+    @Inject 
+    private CreateArtefactAtomicInfoRecords createArtefactAtomicInfoRecords;
 
     public List<Atomicinformation> scanArtefact(){
         List<Atomicinformation> listAtomicInfoAll;
         List<Atomicinformation> listAtomicInfoFound;
         Artefact artefact;
         Project project;
-        CreateArtefactAtomicInfoRecords createArtefactAtomicInfoRecords = new CreateArtefactAtomicInfoRecords();
-        
+
         try {
             artefact = artefactController.getCurrent();
-            if (artefact.getArtefactFile()!= null){
-               project = selectedProject.getProject();
-               listAtomicInfoAll = saveRetrieve.findByEntityActiveAndProjectID(true, project);
-               listAtomicInfoFound = scan(artefact, listAtomicInfoAll);
-               createArtefactAtomicInfoRecords.CreateInfoRecords(listAtomicInfoAll, artefact); 
-               return listAtomicInfoFound;
-            }
-        else{
-            throw new Exception("No document available or selected to scan");
-        }
-        } catch (Exception e) {
-            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("NoArtefactAvailabletoScan"));
-            return null;
+            fileAvailable(artefact);
+            supportFileType(artefact);
+            
+            project = selectedProject.getProject();
+            listAtomicInfoAll = atomicinformationController.getSaveRetrieve().findByEntityActiveAndProjectID(true, project);
+            listAtomicInfoFound = scan(artefact, listAtomicInfoAll);
+            createArtefactAtomicInfoRecords.CreateInfoRecords(listAtomicInfoAll, artefact); 
+            return listAtomicInfoFound;
+ 
         } 
-    }
+        catch (FileNotFoundException  e) {
+            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("NoFileAvailabletoScan"));
+            return null;  
+        }
+        catch (InvalidFileFormatException e){
+            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("ScanningOfThisFileFormatIsNotSupported"));
+            return null;
+        }
+        catch (Exception e){
+            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("CouldNotScanDocument"));
+            return null;
+        }
+    } 
     
     abstract public List<Atomicinformation> scan (Artefact artefact, List<Atomicinformation> projectAtomicinfo);
     
@@ -66,5 +78,19 @@ abstract public class Scan {
        return cleanString;
     }
     
+    private void fileAvailable(Artefact artefact) throws FileNotFoundException {
+            if (artefact.getArtefactFile() == null || artefact.getArtefactFile().length == 0){
+                throw new FileNotFoundException();
+            }
+    }
     
+    private void supportFileType(Artefact artefact) throws InvalidFileFormatException {
+        String fileExt = FilenameUtils.getExtension(artefact.getArtefactFilename());
+        /*  This code could be extended to check for additional file types that are pulled from 
+        *   db table of config file
+        */
+        if (!"odt".equals(fileExt)){
+            throw new InvalidFileFormatException("File Type is: " + fileExt);
+        }
+    }
 }

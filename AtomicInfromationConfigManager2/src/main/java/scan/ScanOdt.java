@@ -30,15 +30,11 @@ public class ScanOdt extends Scan{
     @Override
     public List<Atomicinformation> scan (Artefact artefact, List<Atomicinformation> projectAtomicinfo){
         List<Atomicinformation> itemsFound = new LinkedList<>();
-        int fileLength;
         TextDocument odtDocument;
-        fileLength = artefact.getArtefactFile().length;
-        byte[] file = new byte[fileLength];
-       
-        
+        byte[] file = artefact.getArtefactFile();
+         
         try {
-            odtDocument = TextDocument.newTextDocument();
-            InputStream inputStream = new ByteArrayInputStream(file);
+            ByteArrayInputStream inputStream = new ByteArrayInputStream(file);
             odtDocument = TextDocument.loadDocument(inputStream);
             
             Iterator<Paragraph> iterator = odtDocument.getParagraphIterator();
@@ -46,18 +42,18 @@ public class ScanOdt extends Scan{
             while (iterator.hasNext()){
                 Paragraph paragraph;
                 String paragraphText;
+                String paragraphTextClean;
                 
                 paragraph = iterator.next();
                 paragraphText = paragraph.getTextContent();
+                paragraphTextClean = cleanString(paragraphText);
                 
                 for (Atomicinformation atomicinformation : projectAtomicinfo){
-                    String paragraphTextClean;
-                    String atomicinformationClean;
                     
-                    paragraphTextClean = cleanString(paragraphText);
+                    String atomicinformationClean;
                     atomicinformationClean = cleanString(atomicinformation.getContent());
                     
-                    if(StringUtils.contains(paragraphText, atomicinformationClean)){
+                    if(StringUtils.contains(paragraphTextClean, atomicinformationClean)){
                         itemsFound.add(atomicinformation);
                     }
                 }
