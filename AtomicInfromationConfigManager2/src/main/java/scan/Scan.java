@@ -45,14 +45,21 @@ abstract public class Scan {
         try {
             artefact = artefactController.getCurrent();
             fileAvailable(artefact);
-            supportFileType(artefact);
+            supportedFileType(artefact);
             
             project = selectedProject.getProject();
             listAtomicInfoAll = atomicinformationController.getSaveRetrieve().findByEntityActiveAndProjectID(true, project);
             listAtomicInfoFound = scan(artefact, listAtomicInfoAll);
-            createArtefactAtomicInfoRecords.CreateInfoRecords(listAtomicInfoAll, artefact); 
-            return listAtomicInfoFound;
- 
+            if(listAtomicInfoAll.isEmpty())
+            {
+                JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("FileScannedNothingFound"));
+                return null;
+            }
+            else
+            {
+                createArtefactAtomicInfoRecords.CreateInfoRecords(listAtomicInfoAll, artefact); 
+                return listAtomicInfoFound;
+            }
         } 
         catch (FileNotFoundException  e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("NoFileAvailabletoScan"));
@@ -78,19 +85,19 @@ abstract public class Scan {
        return cleanString;
     }
     
-    private void fileAvailable(Artefact artefact) throws FileNotFoundException {
+    protected void fileAvailable(Artefact artefact) throws FileNotFoundException {
             if (artefact.getArtefactFile() == null || artefact.getArtefactFile().length == 0){
                 throw new FileNotFoundException();
             }
     }
     
-    private void supportFileType(Artefact artefact) throws InvalidFileFormatException {
+    protected void supportedFileType(Artefact artefact) throws InvalidFileFormatException {
         String fileExt = FilenameUtils.getExtension(artefact.getArtefactFilename());
         /*  This code could be extended to check for additional file types that are pulled from 
         *   db table of config file
         */
         if (!"odt".equals(fileExt)){
-            throw new InvalidFileFormatException("File Type is: " + fileExt);
+            throw new InvalidFileFormatException("File type not supported for scanning. File Type is: " + fileExt);
         }
     }
 }

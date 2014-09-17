@@ -78,7 +78,7 @@ public class UploadFile {
                 artefactController.getCurrent().setArtefactFilename(getFilename(file));
                 artefactController.getCurrent().setArtefactFile(buffer);
                 artefactController.update();
-                outputFileStream();
+                //outputFileStream();
                 JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("ArtefactUpload"));
                 return "Success";
             }

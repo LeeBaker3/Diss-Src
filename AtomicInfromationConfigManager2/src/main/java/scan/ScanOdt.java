@@ -34,8 +34,8 @@ public class ScanOdt extends Scan{
         byte[] file = artefact.getArtefactFile();
          
         try {
-            ByteArrayInputStream inputStream = new ByteArrayInputStream(file);
-            odtDocument = TextDocument.loadDocument(inputStream);
+            ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(file);
+            odtDocument = TextDocument.loadDocument(byteArrayInputStream);
             
             Iterator<Paragraph> iterator = odtDocument.getParagraphIterator();
             
@@ -58,6 +58,7 @@ public class ScanOdt extends Scan{
                     }
                 }
             }
+            byteArrayInputStream.close();
             return itemsFound;
         } catch (Exception e) {
             return null;
