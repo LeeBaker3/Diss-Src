@@ -37,7 +37,7 @@ abstract public class Scan {
     private CreateArtefactAtomicInfoRecords createArtefactAtomicInfoRecords;
 
     //public List<Atomicinformation> scanArtefact(){
-    public void scanArtefact(){    
+    public String scanArtefact(){    
         List<Atomicinformation> listAtomicInfoAll;
         List<Atomicinformation> listAtomicInfoFound;
         Artefact artefact;
@@ -54,25 +54,25 @@ abstract public class Scan {
             if(listAtomicInfoFound.isEmpty())
             {
                 JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("FileScannedNothingFound"));
-                //return null;
+                return null;
             }
             else
             {
-                createArtefactAtomicInfoRecords.CreateInfoRecords(listAtomicInfoFound, artefact); 
+                return createArtefactAtomicInfoRecords.CreateInfoRecords(listAtomicInfoFound, artefact); 
                 //return listAtomicInfoFound;
             }
         } 
         catch (FileNotFoundException  e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("NoFileAvailabletoScan"));
-            //return null;  
+            return null;  
         }
         catch (InvalidFileFormatException e){
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("ScanningOfThisFileFormatIsNotSupported"));
-            //return null;
+            return null;
         }
         catch (Exception e){
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("CouldNotScanDocument"));
-            //return null;
+            return null;
         }
     } 
     

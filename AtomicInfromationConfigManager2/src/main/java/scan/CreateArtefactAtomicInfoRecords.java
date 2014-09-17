@@ -24,6 +24,17 @@ public class CreateArtefactAtomicInfoRecords {
     }
     
     private List<Atomicinformation> listAtomicInformation;
+    private int size;
+
+    public int getSize() {
+        return size;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
+    }
+    
+    
 
     public List<Atomicinformation> getListAtomicInformation() {
         return listAtomicInformation;
@@ -35,6 +46,7 @@ public class CreateArtefactAtomicInfoRecords {
     
     public String CreateInfoRecords(List<Atomicinformation> listAtomicInfo, Artefact artefact) { 
         setListAtomicInformation(listAtomicInfo);
+        setSize(listAtomicInfo.size());
         
         return "/Faces/artefactatomicinformation/ScanList";
     }

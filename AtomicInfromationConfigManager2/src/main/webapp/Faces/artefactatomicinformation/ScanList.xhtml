@@ -25,8 +25,7 @@
                             <rich:menuItem label="#{bundle.MenuItemCreateAtomicInformationLink}" action="#{atomicinformationController.prepareCreate}"/>
                         </rich:dropDownMenu>
                     </rich:toolbar>
-                    <h:outputText escape="false" value="#{bundle.ListAtomicinformationEmpty}" rendered="#{createArtefactAtomicInfoRecords.listAtomicInformation.size == 0}"/>
-                    <h:panelGroup rendered="#{createArtefactAtomicInfoRecords.listAtomicInformation.size > 0}">
+                    <h:panelGroup rendered="#{createArtefactAtomicInfoRecords.size > 0}">
                         <h:dataTable value="#{createArtefactAtomicInfoRecords.listAtomicInformation}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
                             <h:column>
                                 <f:facet name="header">
