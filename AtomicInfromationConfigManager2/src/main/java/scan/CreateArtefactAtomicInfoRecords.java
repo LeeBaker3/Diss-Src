@@ -10,21 +10,33 @@ import com.mycompany.atomicinformationconfigurationmanager.entities.Artefact.Art
 import com.mycompany.atomicinformationconfigurationmanager.entities.atomicinformation.Atomicinformation;
 import javax.ejb.Stateless;
 import java.util.List;
+import javax.inject.Named;
 
 /**
  *
  * @author Lee Baker
  */
 @Stateless
+@Named("createArtefactAtomicInfoRecords")
 public class CreateArtefactAtomicInfoRecords {
 
     public CreateArtefactAtomicInfoRecords() {
     }
+    
+    private List<Atomicinformation> listAtomicInformation;
 
-    public boolean CreateInfoRecords(List<Atomicinformation> listAtomicInfo, Artefact artefact) {
-        boolean result = false;
+    public List<Atomicinformation> getListAtomicInformation() {
+        return listAtomicInformation;
+    }
+
+    public void setListAtomicInformation(List<Atomicinformation> listAtomicInformation) {
+        this.listAtomicInformation = listAtomicInformation;
+    }
+    
+    public String CreateInfoRecords(List<Atomicinformation> listAtomicInfo, Artefact artefact) { 
+        setListAtomicInformation(listAtomicInfo);
         
-        return result;
+        return "/Faces/artefactatomicinformation/ScanList";
     }
 
 }

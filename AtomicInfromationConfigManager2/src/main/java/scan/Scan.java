@@ -36,7 +36,8 @@ abstract public class Scan {
     @Inject 
     private CreateArtefactAtomicInfoRecords createArtefactAtomicInfoRecords;
 
-    public List<Atomicinformation> scanArtefact(){
+    //public List<Atomicinformation> scanArtefact(){
+    public void scanArtefact(){    
         List<Atomicinformation> listAtomicInfoAll;
         List<Atomicinformation> listAtomicInfoFound;
         Artefact artefact;
@@ -50,28 +51,28 @@ abstract public class Scan {
             project = selectedProject.getProject();
             listAtomicInfoAll = atomicinformationController.getSaveRetrieve().findByEntityActiveAndProjectID(true, project);
             listAtomicInfoFound = scan(artefact, listAtomicInfoAll);
-            if(listAtomicInfoAll.isEmpty())
+            if(listAtomicInfoFound.isEmpty())
             {
                 JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("FileScannedNothingFound"));
-                return null;
+                //return null;
             }
             else
             {
-                createArtefactAtomicInfoRecords.CreateInfoRecords(listAtomicInfoAll, artefact); 
-                return listAtomicInfoFound;
+                createArtefactAtomicInfoRecords.CreateInfoRecords(listAtomicInfoFound, artefact); 
+                //return listAtomicInfoFound;
             }
         } 
         catch (FileNotFoundException  e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("NoFileAvailabletoScan"));
-            return null;  
+            //return null;  
         }
         catch (InvalidFileFormatException e){
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("ScanningOfThisFileFormatIsNotSupported"));
-            return null;
+            //return null;
         }
         catch (Exception e){
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("CouldNotScanDocument"));
-            return null;
+            //return null;
         }
     } 
     
