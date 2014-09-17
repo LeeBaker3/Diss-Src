@@ -11,39 +11,57 @@ import com.mycompany.atomicinformationconfigurationmanager.entities.atomicinform
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import javax.ejb.Stateless;
+import javax.inject.Named;
 import org.odftoolkit.simple.TextDocument;
 import org.odftoolkit.simple.text.Paragraph;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  *
  * @author Lee Baker
  */
 @Stateless
+@Named("scanOdt")
 public class ScanOdt extends Scan{
 
     @Override
     public List<Atomicinformation> scan (Artefact artefact, List<Atomicinformation> projectAtomicinfo){
-        List<Atomicinformation> itemsFound;
-        int fileLength;
+        List<Atomicinformation> itemsFound = new LinkedList<>();
         TextDocument odtDocument;
-        fileLength = artefact.getArtefactFile().length;
-        byte[] file = new byte[fileLength];
-        
+        byte[] file = artefact.getArtefactFile();
+         
         try {
-            odtDocument = TextDocument.newTextDocument();
-            InputStream inputStream = new ByteArrayInputStream(file);
-            odtDocument = TextDocument.loadDocument(inputStream);
+            ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(file);
+            odtDocument = TextDocument.loadDocument(byteArrayInputStream);
             
             Iterator<Paragraph> iterator = odtDocument.getParagraphIterator();
             
+            while (iterator.hasNext()){
+                Paragraph paragraph;
+                String paragraphText;
+                String paragraphTextClean;
+                
+                paragraph = iterator.next();
+                paragraphText = paragraph.getTextContent();
+                paragraphTextClean = cleanString(paragraphText);
+                
+                for (Atomicinformation atomicinformation : projectAtomicinfo){
+                    
+                    String atomicinformationClean;
+                    atomicinformationClean = cleanString(atomicinformation.getContent());
+                    
+                    if(StringUtils.contains(paragraphTextClean, atomicinformationClean)){
+                        itemsFound.add(atomicinformation);
+                    }
+                }
+            }
+            byteArrayInputStream.close();
             return itemsFound;
         } catch (Exception e) {
             return null;
-        }
-        
-        
-    }
-            
+        } 
+    }          
 }
