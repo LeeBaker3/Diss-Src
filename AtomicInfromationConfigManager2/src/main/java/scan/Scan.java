@@ -58,7 +58,7 @@ abstract public class Scan {
             }
             else
             {
-                return createArtefactAtomicInfoRecords.CreateInfoRecords(listAtomicInfoFound, artefact); 
+                return createArtefactAtomicInfoRecords.createInfoRecords(listAtomicInfoFound, artefact); 
                 //return listAtomicInfoFound;
             }
         } 

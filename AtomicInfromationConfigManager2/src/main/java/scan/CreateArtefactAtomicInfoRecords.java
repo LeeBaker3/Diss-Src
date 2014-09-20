@@ -13,6 +13,7 @@ import com.mycompany.atomicinformationconfigurationmanager.entities.Artefactatom
 import com.mycompany.atomicinformationconfigurationmanager.entities.Artefactatomicinformation.ArtefactatomicinformationController;
 import com.mycompany.atomicinformationconfigurationmanager.entities.atomicinformation.Atomicinformation;
 import com.mycompany.atomicinformationconfigurationmanager.entities.util.JsfUtil;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import javax.ejb.Stateless;
@@ -34,8 +35,9 @@ public class CreateArtefactAtomicInfoRecords {
     public CreateArtefactAtomicInfoRecords() {
     }
     
-    private List<Atomicinformation> listItems;
-    private Map<Atomicinformation, Boolean> newItems = new HashMap<>();
+    private List<Atomicinformation> foundItems;
+    private Map<Atomicinformation, Boolean> checked = new HashMap<>();
+    private List<Atomicinformation> newItems;
     private int size;
     @Inject
     ArtefactatomicinformationController artefactatomicinformationController;
@@ -52,40 +54,57 @@ public class CreateArtefactAtomicInfoRecords {
         this.size = size;
     }
 
-    public Map<Atomicinformation, Boolean> getNewItems() {
+    public Map<Atomicinformation, Boolean> getChecked() {
+        return checked;
+    }
+
+    public void setChecked(Map<Atomicinformation, Boolean> checked) {
+        this.checked = checked;
+    }
+    
+    public List<Atomicinformation> getFoundItems() {
+        return foundItems;
+    }
+
+    public void setFoundItems(List<Atomicinformation> foundItems) {
+        this.foundItems = foundItems;
+    }
+
+    public List<Atomicinformation> getNewItems() {
         return newItems;
     }
 
-    public void setNewItems(Map<Atomicinformation, Boolean> newItems) {
+    public void setNewItems(List<Atomicinformation> newItems) {
         this.newItems = newItems;
     }
     
-    public List<Atomicinformation> getListItems() {
-        return listItems;
-    }
-
-    public void setListItems(List<Atomicinformation> listItems) {
-        this.listItems = listItems;
-    }
     
-    
-    public String CreateInfoRecords(List<Atomicinformation> listAtomicInfo, Artefact artefact) { 
-        setListItems(listAtomicInfo);
-        newItemsFound(listAtomicInfo);
+    public String createInfoRecords(List<Atomicinformation> foundItems, Artefact artefact) { 
+        setFoundItems(foundItems);
+        newItemsFound();
         setSize(newItems.size());
-        
+       
         return "/Faces/artefactatomicinformation/ScanList";
     }
     
-    private String newItemsFound (List<Atomicinformation> foundItems){
+    private String newItemsFound (){
+        List<Atomicinformation> items = getFoundItems();
+        newItems = new ArrayList<Atomicinformation>();
+        
         try{
             List<Artefactatomicinformation> currentItems = artefactatomicinformationController.getSaveRetrieve().findByEntityActiveAndArtefactIDAndIsCurrentVersion(true, artefactController.getCurrent(), true);
             if ( currentItems != null || currentItems.isEmpty() != true){
-                for (Atomicinformation item : foundItems) {
-                    if (currentItems.contains(item) != false){
-                        newItems.put(item, Boolean.FALSE);
+                for (Atomicinformation atomic: items){
+                    if (currentItems.contains(atomic) == false){
+                           newItems.add(atomic);
                     }
                 }
+                return null;
+            }
+            else
+            {
+                newItems.addAll(items);
+                return null;
             }
         }
         catch(Exception e)
@@ -95,13 +114,21 @@ public class CreateArtefactAtomicInfoRecords {
         return returnToJSFPage.returnToArtefactView();
     }
     
-    public void create(){
-        for (Entry<Atomicinformation, Boolean> entry : newItems.entrySet()) {
-            if (entry.getValue()) {
-                artefactatomicinformationController.prepareCreateFromArtefact();
-                artefactatomicinformationController.getCurrent().setAtomicInformationID(entry.getKey());
-                artefactatomicinformationController.update();
+    public String create(){
+        try{
+            for(Atomicinformation item: newItems){
+                if(checked.get(item.getId()) !=null){
+                    if(checked.get(item.getId())){
+                        artefactatomicinformationController.prepareCreateFromArtefact();
+                        artefactatomicinformationController.getCurrent().setAtomicInformationID(item);
+                        artefactatomicinformationController.update();
+                    }
+                }
             }
         }
+        catch (Exception e){
+            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("ScanListArtefactatomicinformationFail"));
+        }
+        return returnToJSFPage.returnToArtefactView();
     }
 }
