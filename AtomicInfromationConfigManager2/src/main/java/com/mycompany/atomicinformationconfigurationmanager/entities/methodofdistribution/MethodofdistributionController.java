@@ -203,7 +203,7 @@ public class MethodofdistributionController extends BaseController implements Se
     }
     
     private void updateCurrentItem() {
-        int count = getSaveRetrieve().countEntityActive(true, true);
+        int count = getSaveRetrieve().countEntityActiveIsCurrentVersion(true, true);
         if (selectedItemIndex >= count) {
             // selected index cannot be bigger than number of items:
             selectedItemIndex = count - 1;

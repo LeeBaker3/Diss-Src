@@ -82,7 +82,7 @@ public class ArtefactdistributionController extends BaseController implements Se
                 
                 /* 
                 *   10/08/14 @Lee Baker
-                *   IDE Code modified to use countEntityActive() instead of count()
+                *   IDE Code modified to use countEntityActiveIsCurrentVersion() instead of count()
                 */     
                 @Override
                 public int getItemsCount() {
@@ -91,7 +91,7 @@ public class ArtefactdistributionController extends BaseController implements Se
                         localCount = getSaveRetrieve().countEntityActiveAndArtefactIDIAndsCurrentVersion(artefactController.getCurrent(), true, true);
                     }
                     else {
-                        localCount = getSaveRetrieve().countEntityActive(true, true);
+                        localCount = getSaveRetrieve().countEntityActiveIsCurrentVersion(true, true);
                     }
                     return localCount;
                 }
@@ -267,7 +267,7 @@ public class ArtefactdistributionController extends BaseController implements Se
             count = getSaveRetrieve().countEntityActiveAndArtefactIDIAndsCurrentVersion(artefactController.getCurrent(), true, true);
         }
         else{
-            count = getSaveRetrieve().countEntityActive(true, true);
+            count = getSaveRetrieve().countEntityActiveIsCurrentVersion(true, true);
         }
         if (selectedItemIndex >= count) {
             // selected index cannot be bigger than number of items:

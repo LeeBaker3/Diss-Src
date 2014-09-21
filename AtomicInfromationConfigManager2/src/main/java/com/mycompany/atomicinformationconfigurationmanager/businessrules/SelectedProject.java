@@ -28,6 +28,8 @@ import javax.inject.Named;
  *  @author Lee Baker
  *  @version 1.0
  */
+
+//START LEE BAKER GENERATED CODE
 @Named("selectedProject")
 @Stateful
 @SessionScoped
@@ -53,9 +55,10 @@ public class SelectedProject implements Serializable {
     }
     
     /**
-     *  Recreates models of MVC pattern for entities that use the Project Primary Key
+     *  setProject method. Recreates models of MVC pattern for entities that use the Project Primary Key
      *  as a Foreign Key reference 
-     *  @param project selected
+     * 
+     *  @param project selected project
      */
     public void setProject(Project project) {
         this.project = project;
@@ -90,6 +93,5 @@ public class SelectedProject implements Serializable {
         }
         return true;
     }
-    
-    
 }
+//END LEE BAKER GENERATED CODE

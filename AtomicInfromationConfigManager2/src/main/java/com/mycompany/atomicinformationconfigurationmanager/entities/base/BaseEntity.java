@@ -30,6 +30,8 @@ import javax.validation.constraints.NotNull;
  *  @author Lee Baker
  *  @version 1.0
  * */
+
+//START LEE BAKER GENERATED CODE
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class BaseEntity implements Serializable{
@@ -103,3 +105,4 @@ protected boolean entityActive;
         return super.clone();
     }
 }
+//END LEE BAKER GENERATED CODE

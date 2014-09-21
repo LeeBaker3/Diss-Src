@@ -113,7 +113,7 @@ public class AtomicinformationController extends BaseController implements Seria
                         localCount = getSaveRetrieve().countEntityActiveAndProjectIDAndIsCurrentVersion(true, projectController.getCurrent(), true);
                     }
                     else{
-                        localCount = getSaveRetrieve().countEntityActive(true, true);
+                        localCount = getSaveRetrieve().countEntityActiveIsCurrentVersion(true, true);
                     }
                     return localCount;
                 }
@@ -334,7 +334,7 @@ public class AtomicinformationController extends BaseController implements Seria
              count = getSaveRetrieve().countEntityActiveAndProjectIDAndIsCurrentVersion(true, projectController.getCurrent(), true);
          }
          else {
-             count = getSaveRetrieve().countEntityActive(true, true);
+             count = getSaveRetrieve().countEntityActiveIsCurrentVersion(true, true);
          }
                  
         if (selectedItemIndex >= count) {

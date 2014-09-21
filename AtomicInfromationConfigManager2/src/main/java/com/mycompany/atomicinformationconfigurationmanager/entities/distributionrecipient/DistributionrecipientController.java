@@ -76,7 +76,7 @@ public class DistributionrecipientController extends BaseController implements S
 
                 /*
                 *   13/08/14    @Lee Baker
-                *   IDE Code modified to use countEntityActive() instead of count()
+                *   IDE Code modified to use countEntityActiveIsCurrentVersion() instead of count()
                 */
                 
                 
@@ -87,7 +87,7 @@ public class DistributionrecipientController extends BaseController implements S
                             localCount = getSaveRetrieve().countEntityActiveAndProjectIDAndIsCurrentVersion(projectController.getCurrent(), true, true);
                             }
                         else {
-                            localCount = getSaveRetrieve().countEntityActive(true, true);
+                            localCount = getSaveRetrieve().countEntityActiveIsCurrentVersion(true, true);
                         }
                     return localCount;
                 }
@@ -235,7 +235,7 @@ public class DistributionrecipientController extends BaseController implements S
             count = getSaveRetrieve().countEntityActiveAndProjectIDAndIsCurrentVersion(projectController.getCurrent(), true, true);
         }
         else {
-            count = getSaveRetrieve().countEntityActive(true, true);
+            count = getSaveRetrieve().countEntityActiveIsCurrentVersion(true, true);
         }
         
         if (selectedItemIndex >= count) {

@@ -27,6 +27,8 @@ import javax.inject.Named;
  *  @author Lee Baker
  *  @version 1.0
  */
+
+//START LEE BAKER GENERATED CODE
 @Stateless
 @Named("updateArtefactAtomicInformationLinks")
 
@@ -55,12 +57,13 @@ public class UpdateArtefactAtomicInformationLinks {
     }
     
     /**
-     *  The is method determines if the update flag has been set to true when a Artefact entity
+     *  update method. The is method determines if the update flag has been set to true when a Artefact entity
      *  has had a version update. If the flag is set to true then new artefactatomicinformation entities
      *  are created. If the flag is set to false then no new artefactatomicinformation entities are created 
      *  for the new version of the Artefact entity. When the process is finished a string is returned that 
      *  represent the xhtml JSF page to be displayed.
-     *  @return 
+     * 
+     *  @return string of the .xhtml JSF page to be navigated too
      */
     public String update() {
         String result = null;
@@ -85,7 +88,7 @@ public class UpdateArtefactAtomicInformationLinks {
     }
     
     /**
-     *  Creates a DataModel of the  artefactatomicinformation entities that reference old version of the Artefact entity
+     *  createDataModel method. Creates a DataModel of the  artefactatomicinformation entities that reference old version of the Artefact entity
      *  When the the DataModel is created the number of new entities to be created is identified and set in the count 
      *  property
      */
@@ -95,7 +98,7 @@ public class UpdateArtefactAtomicInformationLinks {
     }    
     
     /**
-     *  Loops through each of the artefactatomicinformation entities in the DataModel for the old version of the Artefact entity
+     *  copyEntities method. Loops through each of the artefactatomicinformation entities in the DataModel for the old version of the Artefact entity
      *  and creates new artefactatomicinformation entities that reference the same atomicinformation entities as 
      *  original artefactatomicinformation. 
      */
@@ -110,3 +113,4 @@ public class UpdateArtefactAtomicInformationLinks {
         }
     }
 }
+//END LEE BAKER GENERATED CODE

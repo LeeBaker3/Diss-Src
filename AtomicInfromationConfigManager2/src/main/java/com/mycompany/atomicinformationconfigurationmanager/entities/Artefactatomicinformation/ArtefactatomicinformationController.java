@@ -96,7 +96,7 @@ public class ArtefactatomicinformationController extends BaseController implemen
                 
                 /* 
                 *   03/08/14 @Lee Baker
-                *   IDE Code modified to use countEntityActive() instead of count()
+                *   IDE Code modified to use countEntityActiveIsCurrentVersion() instead of count()
                 */ 
                 @Override
                 public int getItemsCount() {
@@ -105,7 +105,7 @@ public class ArtefactatomicinformationController extends BaseController implemen
                         localCount = getSaveRetrieve().countEntityActiveAndArtefactIDAndIsCurrentVersion(true, artefactController.getCurrent(), true);
                     }
                     else{
-                        localCount = getSaveRetrieve().countEntityActive(true, true);
+                        localCount = getSaveRetrieve().countEntityActiveIsCurrentVersion(true, true);
                     }
                     return localCount;
                 }
@@ -314,7 +314,7 @@ public class ArtefactatomicinformationController extends BaseController implemen
             count = getSaveRetrieve().countEntityActiveAndArtefactIDAndIsCurrentVersion(true, artefactController.getCurrent(), true);
         }
         else {
-            count = getSaveRetrieve().countEntityActive(true, true);
+            count = getSaveRetrieve().countEntityActiveIsCurrentVersion(true, true);
         }
         if (selectedItemIndex >= count) {
             // selected index cannot be bigger than number of items:

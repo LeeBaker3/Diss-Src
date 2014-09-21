@@ -21,6 +21,8 @@ import javax.inject.Named;
  *  @author Lee Baker
  *  @version 1.0
  */
+
+//START LEE BAKER GENERATED CODE
 @Named("returnToJSFPage")
 @Stateless
 public class ReturnToJSFPage {
@@ -33,9 +35,10 @@ public class ReturnToJSFPage {
     private AtomicinformationController atomicinformationController;
     
     /**
-     *  Recreates the Models (MVC Pattern) of ' Artefact Distribution '
+     *  returnToArtefactView method. Recreates the Models (MVC Pattern) of ' Artefact Distribution '
      *  and ' Artefact Atomic Information ' entities when returning to the  
      *  View.xhtml JSF page
+     * 
      *  @return the location of the View.xhtml JSF page for the artefact entity
      */
     public String returnToArtefactView(){
@@ -45,8 +48,9 @@ public class ReturnToJSFPage {
     }
     
     /**
-     *  Recreates the Model (MVC Pattern) of the ' Atomic Information ' entity 
+     *  returnToArtefactAtomicinformationCreate method. Recreates the Model (MVC Pattern) of the ' Atomic Information ' entity 
      *  when returning to the View.xhtml JSF page 
+     * 
      *  @return the location of the CreateFromArtefact.xhtml JSF page for 
      *  the artefactatomicinformation entity
      */
@@ -55,3 +59,4 @@ public class ReturnToJSFPage {
         return "/Faces/artefactatomicinformation/CreateFromArtefact";
     }
 }
+//END LEE BAKER GENERATED CODE
