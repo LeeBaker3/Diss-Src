@@ -39,12 +39,12 @@ public class TypeofatomicinformationController extends BaseController implements
         }
         return current;
     }
-    
+
     public void setSelected(ValueChangeEvent event){
         current = (Typeofatomicinformation) getItems().getRowData();
         itemSelected = true;
     }
-    
+
     private String prepareSelected(String jsfPage){
         try {
             if (itemSelected == false)
@@ -101,7 +101,7 @@ public class TypeofatomicinformationController extends BaseController implements
 
     public String create() {
         try {
-            /*  
+            /*
             *   09/08/14 @Lee Baker
             *   Set entityActive = true when created
             */
@@ -129,7 +129,7 @@ public class TypeofatomicinformationController extends BaseController implements
             return null;
         }
     }
-    
+
     /*  31/08/14 Remarked out never used IDE Code
     public String destroy() {
         current = (Typeofatomicinformation) getItems().getRowData();
@@ -164,14 +164,14 @@ public class TypeofatomicinformationController extends BaseController implements
     */
 
 
-    /*  
+    /*
     *   09/08/14 @Lee Baker
     *   Code added to delete entity instead of destroying it
-    */       
+    */
      public String delete() {
         String result;
         result = prepareSelected("List");
-        if (result == "List"){
+        if ("List".equals(result)){
             performDelete();
             recreatePagination();
             recreateModel();
@@ -201,8 +201,8 @@ public class TypeofatomicinformationController extends BaseController implements
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
         }
     }
-    
-    
+
+
     private void updateCurrentItem() {
         int count = getSaveRetrieve().countEntityActive(true, true);
         if (selectedItemIndex >= count) {
@@ -224,9 +224,9 @@ public class TypeofatomicinformationController extends BaseController implements
         }
         return items;
     }
-    /* 
+    /*
     *   End of modified IDE code
-    */  
+    */
 
     public void recreateModel() {
         items = null;

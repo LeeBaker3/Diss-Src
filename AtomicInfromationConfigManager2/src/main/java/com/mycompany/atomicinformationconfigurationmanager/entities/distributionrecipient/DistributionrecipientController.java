@@ -22,6 +22,7 @@ import javax.inject.Named;
 @Named("distributionrecipientController")
 @SessionScoped
 public class DistributionrecipientController extends BaseController implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     private Distributionrecipient current;
     private boolean  itemSelected = false; //Set to true when an item is selected in the List DataTable
@@ -197,7 +198,7 @@ public class DistributionrecipientController extends BaseController implements S
     public String delete(){
         String result;
         result = prepareSelected("List");
-        if (result == "List"){
+        if ("List".equals(result)){
             performDelete();
             recreatePagination();
             recreateModel();

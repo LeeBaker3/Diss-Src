@@ -88,13 +88,20 @@ public class CreateArtefactAtomicInfoRecords {
     
     private String newItemsFound(){
         List<Atomicinformation> items = getFoundItems();
-        newItems = new ArrayList<Atomicinformation>();
+        newItems = new ArrayList<>();
+        List<Atomicinformation> currentItemsAtomic = new ArrayList<>();
         
         try{
             List<Artefactatomicinformation> currentItems = artefactatomicinformationController.getSaveRetrieve().findByEntityActiveAndArtefactIDAndIsCurrentVersion(true, artefactController.getCurrent(), true);
-            if ( currentItems != null || currentItems.isEmpty() != true){
+            if (currentItems.isEmpty() == false){
+                for (Artefactatomicinformation atomic: currentItems){
+                    currentItemsAtomic.add(atomic.getAtomicInformationID());
+                }
+            }
+            
+            if (currentItems.isEmpty() == false){
                 for (Atomicinformation atomic: items){
-                    if (currentItems.contains(atomic) == false){
+                    if (currentItemsAtomic.contains(atomic) == false){
                         newItems.add(atomic);
                     }
                 }

@@ -87,7 +87,7 @@ public class UploadFile {
                 artefactController.getCurrent().setArtefactFilename(getFilename(file));
                 artefactController.getCurrent().setArtefactFile(buffer);
                 artefactController.update();
-                //outputFileStream();
+               
                 JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("ArtefactUpload"));
                 return "Success";
             }
@@ -96,29 +96,4 @@ public class UploadFile {
             return "Success";
         }
     }
-
-    private void outputFilePart() throws IOException{
-        try {
-            TextDocument oldDocument;
-            InputStream inputStream = file.getInputStream();
-            oldDocument = TextDocument.loadDocument(inputStream);
-            oldDocument.addParagraph("New text added for File Part Test");
-            oldDocument.save("C:\\Users\\Lee Baker\\Desktop\\TestFileUpdatePart.odt");  
-        } catch (Exception e) {
-        }
-    }
-    
-    private void outputFileStream() throws IOException{
-        try {
-            byte[] bytes = artefactController.getCurrent().getArtefactFile();
-            ByteArrayInputStream in = new ByteArrayInputStream(bytes);
-            TextDocument oldDocument;
-            oldDocument = TextDocument.loadDocument(in);
-            oldDocument.addParagraph("New text added for File Stream Test");
-            oldDocument.save("C:\\Users\\Lee Baker\\Desktop\\TestFileUpdateStream.odt");  
-        } catch (Exception e) {
-        }
-    }
-    
-
 }

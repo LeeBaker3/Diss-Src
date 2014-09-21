@@ -230,7 +230,7 @@ public class ArtefactdistributionController extends BaseController implements Se
     public String delete() {
         String result;
         result = prepareSelected("List");
-        if (result == "List"){
+        if ("List".equals(result)){
             performDelete();
             recreatePagination();
             recreateModel();

@@ -51,6 +51,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Project.findByPreviousVersionReference", query = "SELECT p FROM Project p WHERE p.previousVersionReference = :previousVersionReference"),
     @NamedQuery(name = "Project.findByEntityActive", query = "SELECT p FROM Project p WHERE p.entityActive = :entityActive")})
 public class Project extends BaseEntity implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     @Size(max = 45)
     @Column(name = "ProjectReference")

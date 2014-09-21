@@ -18,6 +18,7 @@ import javax.inject.Named;
 @Named("baseEntityController")
 @SessionScoped
 public class BaseEntityController extends BaseController implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     private BaseEntity current;
     private DataModel items = null;

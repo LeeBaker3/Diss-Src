@@ -22,6 +22,7 @@ import javax.inject.Named;
 @Named("artefactatomicinformationController")
 @SessionScoped
 public class ArtefactatomicinformationController extends BaseController implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     private Artefactatomicinformation current;
     private Artefactatomicinformation old;
@@ -276,7 +277,7 @@ public class ArtefactatomicinformationController extends BaseController implemen
     public String delete() {
         String result;
         result = prepareSelected("List");
-        if (result == "List"){
+        if ("List".equals(result)){
             performDelete();
             recreatePagination();
             recreateModel();

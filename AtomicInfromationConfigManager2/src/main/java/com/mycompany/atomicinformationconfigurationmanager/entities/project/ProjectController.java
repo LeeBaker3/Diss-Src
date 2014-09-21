@@ -20,6 +20,7 @@ import javax.inject.Named;
 @Named("projectController")
 @SessionScoped
 public class ProjectController extends BaseController implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     private Project current;
 
@@ -181,7 +182,7 @@ public class ProjectController extends BaseController implements Serializable {
      public String delete() {
         String result;
         result = prepareSelected("List");
-        if (result == "List"){
+        if ("List".equals(result)){
             performDelete();
             recreatePagination();
             recreateModel();

@@ -22,6 +22,7 @@ import javax.inject.Named;
 @Named("atomicinformationController")
 @SessionScoped
 public class AtomicinformationController extends BaseController implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     private Atomicinformation current;
     private Atomicinformation old;
@@ -295,7 +296,7 @@ public class AtomicinformationController extends BaseController implements Seria
     public String delete() {
         String result;
         result = prepareSelected("List");
-        if (result == "List"){
+        if ("List".equals(result)){
             performDelete();
             recreatePagination();
             recreateModel();

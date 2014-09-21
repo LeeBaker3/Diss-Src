@@ -29,6 +29,7 @@ import javax.inject.Named;
 @Stateful
 @SessionScoped
 public class SelectedProject implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     @Inject
     private ProjectController projectController;

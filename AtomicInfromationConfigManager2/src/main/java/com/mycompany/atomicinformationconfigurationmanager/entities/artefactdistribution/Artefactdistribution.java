@@ -80,7 +80,6 @@ public class Artefactdistribution extends BaseEntity implements Serializable {
 
     public Artefactdistribution(Integer artefactDistributionID, int methodOfDistributionID, int versionNumber, boolean isCurrentVersion, boolean entityActive, Date dateOfArtefactDistribution) {
         this.id = artefactDistributionID;
-        //this.methodOfDistributionID = methodOfDistributionID;
         this.versionNumber = versionNumber;
         this.isCurrentVersion = isCurrentVersion;
         this.entityActive = entityActive;

@@ -20,6 +20,7 @@ import javax.inject.Named;
 @Named("methodofdistributionController")
 @SessionScoped
 public class MethodofdistributionController extends BaseController implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     private Methodofdistribution current;
     private boolean  itemSelected = false; //Set to true when an item is selected in the List DataTable
@@ -170,7 +171,7 @@ public class MethodofdistributionController extends BaseController implements Se
      public String delete() {
         String result;
         result = prepareSelected("List");
-        if (result == "List"){
+        if ("List".equals(result)){
             performDelete();
             recreatePagination();
             recreateModel();
