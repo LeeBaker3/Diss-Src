@@ -1,11 +1,9 @@
 package com.mycompany.atomicinformationconfigurationmanager.entities.atomicinformation;
 
-import com.mycompany.atomicinformationconfigurationmanager.entities.Artefactatomicinformation.Artefactatomicinformation;
 import com.mycompany.atomicinformationconfigurationmanager.entities.base.BaseController;
 import com.mycompany.atomicinformationconfigurationmanager.entities.project.ProjectController;
 import com.mycompany.atomicinformationconfigurationmanager.entities.util.JsfUtil;
 import com.mycompany.atomicinformationconfigurationmanager.entities.util.PaginationHelper;
-import com.mycompany.atomicinformationconfigurationmanager.businessrules.SelectedProject;
 import java.io.Serializable;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;

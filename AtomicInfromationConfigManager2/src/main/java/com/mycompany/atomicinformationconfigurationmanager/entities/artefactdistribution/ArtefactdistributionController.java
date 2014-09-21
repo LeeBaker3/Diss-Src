@@ -18,7 +18,6 @@ import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 import javax.inject.Inject;
 import javax.inject.Named;
-import sun.misc.VM;
 
 @Named("artefactdistributionController")
 @SessionScoped

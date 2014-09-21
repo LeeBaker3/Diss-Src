@@ -15,18 +15,16 @@ import com.mycompany.atomicinformationconfigurationmanager.entities.atomicinform
 import com.mycompany.atomicinformationconfigurationmanager.entities.util.JsfUtil;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
-import javax.ejb.Stateless;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.ResourceBundle;
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 /**
- *
  * @author Lee Baker
+ *
  */
 @Stateless
 @Named("createArtefactAtomicInfoRecords")
@@ -121,7 +119,7 @@ public class CreateArtefactAtomicInfoRecords {
                     if(checked.get(item.getId())){
                         artefactatomicinformationController.prepareCreateFromArtefact();
                         artefactatomicinformationController.getCurrent().setAtomicInformationID(item);
-                        artefactatomicinformationController.update();
+                        artefactatomicinformationController.create("prepareCreateFromArtefact");
                     }
                 }
             }

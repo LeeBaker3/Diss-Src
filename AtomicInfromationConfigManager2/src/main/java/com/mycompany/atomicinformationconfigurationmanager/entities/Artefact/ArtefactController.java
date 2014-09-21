@@ -6,8 +6,6 @@ import com.mycompany.atomicinformationconfigurationmanager.entities.util.JsfUtil
 import com.mycompany.atomicinformationconfigurationmanager.entities.util.PaginationHelper;
 import java.io.Serializable;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.component.UIComponent;
@@ -20,7 +18,6 @@ import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 import javax.inject.Inject;
 import javax.inject.Named;
-import sun.misc.VM;
 
 @Named("artefactController")
 @SessionScoped

@@ -6,13 +6,8 @@
 
 package com.mycompany.atomicinformationconfigurationmanager.entities.base;
 
-import com.mycompany.atomicinformationconfigurationmanager.entities.util.JsfUtil;
 import java.io.Serializable;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.ejb.Stateless;
 import javax.enterprise.context.SessionScoped;
-import javax.faces.model.SelectItem;
 import javax.inject.Named;
 
 /**

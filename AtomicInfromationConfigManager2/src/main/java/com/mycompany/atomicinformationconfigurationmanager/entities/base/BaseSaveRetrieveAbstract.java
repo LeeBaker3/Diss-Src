@@ -8,9 +8,7 @@ package com.mycompany.atomicinformationconfigurationmanager.entities.base;
 
 import java.util.List;
 import javax.persistence.EntityManager;
-import javax.persistence.Parameter;
 import javax.persistence.TypedQuery;
-import sun.awt.SunHints;
 
 /**
  *
@@ -112,6 +110,6 @@ public abstract class BaseSaveRetrieveAbstract<T> {
         javax.persistence.criteria.Root<T> rt = cq.from(entityClass);
         cq.select(getEntityManager().getCriteriaBuilder().count(rt));
         javax.persistence.Query q = getEntityManager().createQuery(cq);
-        return ((Long) q.getSingleResult()).intValue();
+        return ((Number) q.getSingleResult()).intValue();
     }
 }

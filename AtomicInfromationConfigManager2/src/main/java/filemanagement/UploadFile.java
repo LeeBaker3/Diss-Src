@@ -12,7 +12,6 @@ import java.io.ByteArrayInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.File;
 import java.util.ResourceBundle;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -51,7 +50,7 @@ public class UploadFile {
             Long fileSizeLong;
             fileSizeLong = file.getSize();
 
-            if(fileSizeLong > (long)Integer.MAX_VALUE){
+            if(fileSizeLong > Integer.MAX_VALUE){
                 return "FileToBig";
             }
             else

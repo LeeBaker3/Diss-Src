@@ -12,14 +12,11 @@ import com.mycompany.atomicinformationconfigurationmanager.entities.Artefactatom
 import com.mycompany.atomicinformationconfigurationmanager.entities.Artefactatomicinformation.ArtefactatomicinformationController;
 import com.mycompany.atomicinformationconfigurationmanager.entities.util.JsfUtil;
 import java.util.ResourceBundle;
-import java.util.jar.Attributes;
-import javax.annotation.ManagedBean;
 import javax.ejb.Stateless;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.naming.Name;
 
 /**
  *
@@ -86,7 +83,7 @@ public class UpdateArtefactAtomicInformationLinks {
     private void copyEntities (){
         for (int i = 0; i < count; i++) {
             getOldItems().setRowIndex(i);
-            Artefactatomicinformation oldArtefactatomicinformation = (Artefactatomicinformation)getOldItems().getRowData();       
+            Artefactatomicinformation oldArtefactatomicinformation = getOldItems().getRowData();       
             artefactatomicinformationController.setCurrent(oldArtefactatomicinformation);
             artefactatomicinformationController.prepareUpdateVersion();
             artefactatomicinformationController.getCurrent().setArtefactID(newArtefact);

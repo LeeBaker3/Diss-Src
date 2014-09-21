@@ -4,11 +4,8 @@ import com.mycompany.atomicinformationconfigurationmanager.entities.Artefact.Art
 import com.mycompany.atomicinformationconfigurationmanager.entities.base.BaseController;
 import com.mycompany.atomicinformationconfigurationmanager.entities.util.JsfUtil;
 import com.mycompany.atomicinformationconfigurationmanager.entities.util.PaginationHelper;
-
 import java.io.Serializable;
-import java.util.HashSet;
 import java.util.ResourceBundle;
-import java.util.Set;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.component.UIComponent;
@@ -21,7 +18,6 @@ import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 import javax.inject.Inject;
 import javax.inject.Named;
-import org.apache.jasper.xmlparser.ParserUtils;
 
 @Named("artefactatomicinformationController")
 @SessionScoped

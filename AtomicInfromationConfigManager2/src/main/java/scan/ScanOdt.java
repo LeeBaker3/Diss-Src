@@ -9,15 +9,14 @@ package scan;
 import com.mycompany.atomicinformationconfigurationmanager.entities.Artefact.Artefact;
 import com.mycompany.atomicinformationconfigurationmanager.entities.atomicinformation.Atomicinformation;
 import java.io.ByteArrayInputStream;
-import java.io.InputStream;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Named;
+import org.apache.commons.lang3.StringUtils;
 import org.odftoolkit.simple.TextDocument;
 import org.odftoolkit.simple.text.Paragraph;
-import org.apache.commons.lang3.StringUtils;
 
 /**
  *

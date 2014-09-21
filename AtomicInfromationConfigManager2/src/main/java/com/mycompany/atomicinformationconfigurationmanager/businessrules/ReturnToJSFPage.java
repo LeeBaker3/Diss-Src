@@ -6,13 +6,10 @@
 
 package com.mycompany.atomicinformationconfigurationmanager.businessrules;
 
-import com.mycompany.atomicinformationconfigurationmanager.entities.Artefact.Artefact;
 import com.mycompany.atomicinformationconfigurationmanager.entities.Artefactatomicinformation.ArtefactatomicinformationController;
 import com.mycompany.atomicinformationconfigurationmanager.entities.artefactdistribution.ArtefactdistributionController;
 import com.mycompany.atomicinformationconfigurationmanager.entities.atomicinformation.AtomicinformationController;
-import java.util.Objects;
 import javax.ejb.Stateless;
-import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
