@@ -14,10 +14,12 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 /**
- *
- * @author Lee Baker
- * 
- * This class is used to hold a reference to the currently selected artefact by the user
+ *  ReturnToJSFPage Class 
+ *  This class is used to to recreate the Model part of the MVC pattern for entities when navigating 
+ *  back to a JSF page of entities when new records have been created in referenced entities in the ERD
+ *  
+ *  @author Lee Baker
+ *  @version 1.0
  */
 @Named("returnToJSFPage")
 @Stateless
@@ -30,12 +32,24 @@ public class ReturnToJSFPage {
     @Inject
     private AtomicinformationController atomicinformationController;
     
+    /**
+     *  Recreates the Models (MVC Pattern) of ' Artefact Distribution '
+     *  and ' Artefact Atomic Information ' entities when returning to the  
+     *  View.xhtml JSF page
+     *  @return the location of the View.xhtml JSF page for the artefact entity
+     */
     public String returnToArtefactView(){
         artefactatomicinformationController.recreateModel();
         artefactdistributionController.recreateModel();
         return "/Faces/artefact/View";
     }
     
+    /**
+     *  Recreates the Model (MVC Pattern) of the ' Atomic Information ' entity 
+     *  when returning to the View.xhtml JSF page 
+     *  @return the location of the CreateFromArtefact.xhtml JSF page for 
+     *  the artefactatomicinformation entity
+     */
     public String returnToArtefactAtomicinformationCreate(){
         atomicinformationController.recreateModel();
         return "/Faces/artefactatomicinformation/CreateFromArtefact";

@@ -18,9 +18,18 @@ import javax.persistence.InheritanceType;
 import javax.validation.constraints.NotNull;
 
 /**
- *
- * @author Lee Baker
-*/
+ *  BaseEntity Class. This class describes common attributes for many entity class in this system to allow
+ *  the management of entity version control and preventing the entity from being returned when EntityActive is False
+ *  rather than deleting it from the database. 
+ *  
+ *  The class uses the JPA (Java Persistence API) to access and persist data in a relational database. 
+ *  The class also inherits several methods from the BaseEntity class. All Attributes of the  entity are 
+ *  Annotated according to the JPA specification to meet the underlying database schema.
+ *  
+ *  No methods have been commented as they conform and are believed to be self explanatory and consistent with JPA
+ *  @author Lee Baker
+ *  @version 1.0
+ * */
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class BaseEntity implements Serializable{

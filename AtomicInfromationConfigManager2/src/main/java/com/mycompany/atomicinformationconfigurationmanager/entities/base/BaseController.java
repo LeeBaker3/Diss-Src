@@ -18,8 +18,6 @@ import javax.inject.Named;
 @SessionScoped
 abstract public class BaseController implements Serializable{
 
-    // Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Business Method")
     
     public void setEntityActive(BaseEntity entity){
         entity.entityActive = true;
