@@ -20,13 +20,13 @@ public class ProjectSaveRetrieve extends BaseSaveRetrieveAbstract<Project> {
     @PersistenceContext(unitName = "AtomicInformationConfigManagerPU")
     private EntityManager em;
 
+    public ProjectSaveRetrieve() {
+        super(Project.class);
+    }
+
     @Override
     protected EntityManager getEntityManager() {
         return em;
-    }
-
-    public ProjectSaveRetrieve() {
-        super(Project.class);
     }
     
 }

@@ -23,13 +23,13 @@ public class DistributionrecipientSaveRetrieve extends BaseSaveRetrieveAbstract<
     @PersistenceContext(unitName = "AtomicInformationConfigManagerPU")
     private EntityManager em;
 
+    public DistributionrecipientSaveRetrieve() {
+        super(Distributionrecipient.class);
+    }
+
     @Override
     protected EntityManager getEntityManager() {
         return em;
-    }
-
-    public DistributionrecipientSaveRetrieve() {
-        super(Distributionrecipient.class);
     }
     
         public List<Distributionrecipient> findByEntityActiveAndProjectIDAndIsCurrentVersion (Project project, boolean entityActive, boolean isCurrentVersion){

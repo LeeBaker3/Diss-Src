@@ -20,13 +20,13 @@ public class MethodofdistributionSaveRetrieve extends BaseSaveRetrieveAbstract<M
     @PersistenceContext(unitName = "AtomicInformationConfigManagerPU")
     private EntityManager em;
 
+    public MethodofdistributionSaveRetrieve() {
+        super(Methodofdistribution.class);
+    }
+
     @Override
     protected EntityManager getEntityManager() {
         return em;
-    }
-
-    public MethodofdistributionSaveRetrieve() {
-        super(Methodofdistribution.class);
     }
     
 }

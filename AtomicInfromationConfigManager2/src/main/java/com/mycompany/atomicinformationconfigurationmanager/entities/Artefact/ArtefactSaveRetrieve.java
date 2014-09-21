@@ -23,13 +23,13 @@ public class ArtefactSaveRetrieve extends BaseSaveRetrieveAbstract<Artefact> {
     @PersistenceContext(unitName = "AtomicInformationConfigManagerPU")
     private EntityManager em;
 
+    public ArtefactSaveRetrieve() {
+        super(Artefact.class);
+    }
+
     @Override
     protected EntityManager getEntityManager() {
         return em;
-    }
-
-    public ArtefactSaveRetrieve() {
-        super(Artefact.class);
     }
     
     public List<Artefact> findByEntityActiveAndProjectIDAndIsCurrentVersion (Project project, boolean entityActive, boolean isCurrentVersion){

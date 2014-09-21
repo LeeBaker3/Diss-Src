@@ -23,13 +23,13 @@ public class AtomicinformationSaveRetrieve extends BaseSaveRetrieveAbstract<Atom
     @PersistenceContext(unitName = "AtomicInformationConfigManagerPU")
     private EntityManager em;
 
+    public AtomicinformationSaveRetrieve() {
+        super(Atomicinformation.class);
+    }
+
     @Override
     protected EntityManager getEntityManager() {
         return em;
-    }
-
-    public AtomicinformationSaveRetrieve() {
-        super(Atomicinformation.class);
     }
     
     public List<Atomicinformation> findByEntityActiveAndProjectIDAndIsCurrentVersion(Boolean entityActive, Project project, boolean isCurrentVersion){

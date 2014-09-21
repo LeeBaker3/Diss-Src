@@ -20,13 +20,13 @@ public class TypeofatomicinformationSaveRetrieve extends BaseSaveRetrieveAbstrac
     @PersistenceContext(unitName = "AtomicInformationConfigManagerPU")
     private EntityManager em;
 
+    public TypeofatomicinformationSaveRetrieve() {
+        super(Typeofatomicinformation.class);
+    }
+
     @Override
     protected EntityManager getEntityManager() {
         return em;
-    }
-
-    public TypeofatomicinformationSaveRetrieve() {
-        super(Typeofatomicinformation.class);
     }
     
 }

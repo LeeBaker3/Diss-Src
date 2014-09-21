@@ -26,15 +26,15 @@ import org.junit.Test;
  */
 public class ProjectControllerTest {
     
-    public ProjectControllerTest() {
-    }
-    
     @BeforeClass
     public static void setUpClass() {
     }
     
     @AfterClass
     public static void tearDownClass() {
+    }
+    
+    public ProjectControllerTest() {
     }
     
     @Before

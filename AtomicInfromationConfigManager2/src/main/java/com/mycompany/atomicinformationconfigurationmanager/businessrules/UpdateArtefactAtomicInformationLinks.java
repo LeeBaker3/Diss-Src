@@ -27,9 +27,6 @@ import javax.inject.Named;
 
 public class UpdateArtefactAtomicInformationLinks {
 
-    public UpdateArtefactAtomicInformationLinks() {
-    }
-    
     @Inject
     private ArtefactatomicinformationController artefactatomicinformationController;
     @Inject 

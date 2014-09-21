@@ -30,8 +30,6 @@ import javax.inject.Named;
 @Named("createArtefactAtomicInfoRecords")
 public class CreateArtefactAtomicInfoRecords {
 
-    public CreateArtefactAtomicInfoRecords() {
-    }
     
     private List<Atomicinformation> foundItems;
     private Map<Atomicinformation, Boolean> checked = new HashMap<>();
@@ -43,6 +41,9 @@ public class CreateArtefactAtomicInfoRecords {
     ArtefactController artefactController;
     @Inject
     ReturnToJSFPage returnToJSFPage;
+
+    public CreateArtefactAtomicInfoRecords() {
+    }
 
     public int getSize() {
         return size;
@@ -72,12 +73,12 @@ public class CreateArtefactAtomicInfoRecords {
         return newItems;
     }
 
+    
     public void setNewItems(List<Atomicinformation> newItems) {
         this.newItems = newItems;
     }
     
-    
-    public String createInfoRecords(List<Atomicinformation> foundItems, Artefact artefact) { 
+    public String createInfoRecords (List<Atomicinformation> foundItems, Artefact artefact){ 
         setFoundItems(foundItems);
         newItemsFound();
         setSize(newItems.size());
@@ -85,7 +86,7 @@ public class CreateArtefactAtomicInfoRecords {
         return "/Faces/artefactatomicinformation/ScanList";
     }
     
-    private String newItemsFound (){
+    private String newItemsFound(){
         List<Atomicinformation> items = getFoundItems();
         newItems = new ArrayList<Atomicinformation>();
         
@@ -94,7 +95,7 @@ public class CreateArtefactAtomicInfoRecords {
             if ( currentItems != null || currentItems.isEmpty() != true){
                 for (Atomicinformation atomic: items){
                     if (currentItems.contains(atomic) == false){
-                           newItems.add(atomic);
+                        newItems.add(atomic);
                     }
                 }
                 return null;
@@ -111,8 +112,8 @@ public class CreateArtefactAtomicInfoRecords {
         }
         return returnToJSFPage.returnToArtefactView();
     }
-    
-    public String create(){
+
+    public String create() {
         try{
             for(Atomicinformation item: newItems){
                 if(checked.get(item.getId()) !=null){

@@ -61,9 +61,9 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Artefact.findByArtefactMinorVersionNumber", query = "SELECT a FROM Artefact a WHERE a.artefactMinorVersionNumber = :artefactMinorVersionNumber")})
 public class Artefact extends BaseEntity implements Serializable, Cloneable{
 
+    private static final long serialVersionUID = 1L;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "artefactID")
     private Collection<Artefactatomicinformation> artefactatomicinformationCollection;
-    private static final long serialVersionUID = 1L;
    
     @Basic(optional = false)
     @NotNull
@@ -108,6 +108,13 @@ public class Artefact extends BaseEntity implements Serializable, Cloneable{
         this.artefactName = artefactName;
         this.artefactMajorVersionNumber = artefactMajorVersionNumber;
         this.artefactMinorVersionNumber = artefactMinorVersionNumber;
+    }
+
+    public Artefact(Integer artefactID, int versionNumber, boolean isCurrentVersion, boolean entityActive) {
+        this.id = artefactID;
+        this.versionNumber = versionNumber;
+        this.isCurrentVersion = isCurrentVersion;
+        this.entityActive = entityActive;
     }
 
     public byte[] getArtefactFile() {
@@ -190,13 +197,6 @@ public class Artefact extends BaseEntity implements Serializable, Cloneable{
     @Override
     public String toString() {
         return getArtefactName();
-    }
-
-    public Artefact(Integer artefactID, int versionNumber, boolean isCurrentVersion, boolean entityActive) {
-        this.id = artefactID;
-        this.versionNumber = versionNumber;
-        this.isCurrentVersion = isCurrentVersion;
-        this.entityActive = entityActive;
     }
 
     public Integer getArtefactID() {

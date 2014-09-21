@@ -19,13 +19,13 @@ public class BaseSaveRetrieve extends BaseSaveRetrieveAbstract<BaseEntity> {
     @PersistenceContext(unitName = "AtomicInformationConfigManagerPU")
     private EntityManager em;
 
+    public BaseSaveRetrieve() {
+        super(BaseEntity.class);
+    }
+
     @Override
     protected EntityManager getEntityManager() {
         return em;
-    }
-
-    public BaseSaveRetrieve() {
-        super(BaseEntity.class);
     }
     
 }
