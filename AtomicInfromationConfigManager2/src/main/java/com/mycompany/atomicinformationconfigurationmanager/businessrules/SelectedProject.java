@@ -20,8 +20,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 /**
- *  SelectedProject Class
- *  This class is used to hold a reference to the currently selected project
+ *  SelectedProject Class. This class is used to hold a reference to the currently selected project
  *  When a project is selected a call is made to all entity Models (MVC Pattern) to
  *  recreate the model based on the project that has been selected
  * 

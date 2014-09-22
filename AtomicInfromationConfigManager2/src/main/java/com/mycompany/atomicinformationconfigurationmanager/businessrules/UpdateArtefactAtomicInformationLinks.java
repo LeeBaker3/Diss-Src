@@ -19,10 +19,10 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 /**
- *  UpdateArtefactAtomicInformationLinks Class
- *  When an Artefact is updated to a new version references to the Atomic Information entities
- *  from the old version of the Artefact entity can be created for the new version of the Artefact entity
- *  This class is used to create new ArtefactAtomicInformation entities and copy the references
+ *  UpdateArtefactAtomicInformationLinks Class. When an Artefact is updated to a new version references to 
+ *  the Atomic Information entities from the old version of the Artefact entity can be created for the new 
+ *  version of the Artefact entity. This class is used to create new ArtefactAtomicInformation entities and 
+ *  copy the references
  * 
  *  @author Lee Baker
  *  @version 1.0

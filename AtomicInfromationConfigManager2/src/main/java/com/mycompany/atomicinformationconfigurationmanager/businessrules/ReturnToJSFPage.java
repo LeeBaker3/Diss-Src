@@ -14,8 +14,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 /**
- *  ReturnToJSFPage Class 
- *  This class is used to to recreate the Model part of the MVC pattern for entities when navigating 
+ *  ReturnToJSFPage Class. This class is used to to recreate the Model part of the MVC pattern for entities when navigating 
  *  back to a JSF page of entities when new records have been created in referenced entities in the ERD
  *  
  *  @author Lee Baker

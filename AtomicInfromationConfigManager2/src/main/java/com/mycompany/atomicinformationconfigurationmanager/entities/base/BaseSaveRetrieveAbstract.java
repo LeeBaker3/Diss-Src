@@ -49,7 +49,7 @@ public abstract class BaseSaveRetrieveAbstract<T> {
     
     /**
      * findRange method. Returns a specific number of a Type of entity as a List<> 
-     * @param range an array of integers used to identify the size to be returned
+     * @param range an array of integers used to identify the size to be returned List<>
      * @return List<> of entity entities found
      */
     public List<T> findRange(int[] range) {
