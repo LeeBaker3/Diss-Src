@@ -7,6 +7,18 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.model.SelectItem;
 
+/**
+ *  JsfUtil Class. This class is a Utility class that is generated purely by NetBeans when creating JSF pages 
+ *  from entity classes. It provides various methods for displaying messages on a JSF page, getting a list 
+ *  of objects that can be presented in a list box. The class is unmodified so no further description  
+ *  of this class or method it provides will be supplied. Further information please see
+ *  https://netbeans.org/
+ *  
+ *  @author Oracle
+ *  @version 1.0
+ */
+
+//START IDE GENERATED CODE
 public class JsfUtil {
 
     public static SelectItem[] getSelectItems(List<?> entities, boolean selectOne) {
@@ -57,5 +69,5 @@ public class JsfUtil {
         String theId = JsfUtil.getRequestParameter(requestParameterName);
         return converter.getAsObject(FacesContext.getCurrentInstance(), component, theId);
     }
-
 }
+//END IDE GENERATED CODE
