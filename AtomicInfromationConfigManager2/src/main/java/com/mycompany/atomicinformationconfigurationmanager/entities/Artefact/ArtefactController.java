@@ -81,6 +81,7 @@ public class ArtefactController extends BaseController implements Serializable {
     /**
      * setSelected method. This method is used to set the 'current' property to reference 
      * Artefact entity that has been selected in the DataModel
+     * 
      * @param event 
      */
     public void setSelected(ValueChangeEvent event){
@@ -90,6 +91,12 @@ public class ArtefactController extends BaseController implements Serializable {
     //END LEE BAKER GENERATED CODE
     
     //START IDE GENERATED CODE
+    /**
+     * getSelected method. get the currently selected Artefact entity in the model.
+     * If one has been selected then a new Artefact entity instance is created
+     * 
+     * @return the currently selected Artefact entity in the model (MVC)
+     */
     public Artefact getSelected() {
         if (current == null) {
             current = new Artefact();
@@ -104,8 +111,8 @@ public class ArtefactController extends BaseController implements Serializable {
      * prepareSelected method. The purpose of this method is to identify if a Entity has 
      * been selected in the DataModel and then return String that navigates to the correct 
      * JSF page
-     * @param jsfPage
-     * @return 
+     * @param jsfPage to be returned if the method executes correctly 
+     * @return jsfPage to be returned
      */
     private String prepareSelected(String jsfPage){
         try {
@@ -130,6 +137,11 @@ public class ArtefactController extends BaseController implements Serializable {
     //END IDE GENERATED CODE
     
     //START OF IDE MODIFIED CODE BY LEE BAKER 
+    /**
+     * getPagination method.
+     * 
+     * @return 
+     */
     public PaginationHelper getPagination() {
         if (pagination == null) {
             pagination = new PaginationHelper(10) {
@@ -167,24 +179,44 @@ public class ArtefactController extends BaseController implements Serializable {
         }                
         return pagination;
     }
-         
+    
+    /**
+     * prepareList method. 
+     * 
+     * @return 
+     */
     public String prepareList() {
         recreateModel();
         itemSelected = false;
         return "List";
     }
-
+    
+    /**
+     * prepareView method. 
+     * 
+     * @return 
+     */
     public String prepareView() {
         return prepareSelected("/Faces/artefact/View");
     }
-
+    
+    /**
+     * prepareCreate method.
+     * 
+     * @return 
+     */
     public String prepareCreate() {
         current = new Artefact();
         current.setIsCurrentVersion(true);
         selectedItemIndex = -1;
         return "Create";
     }
-
+    
+    /**
+     * create method.
+     * 
+     * @return 
+     */
     public String create() {
         try {
             /*  
@@ -207,6 +239,11 @@ public class ArtefactController extends BaseController implements Serializable {
     //START OF IDE MODIFIED CODE BY LEE BAKER 
     
     //START IDE GENERATED CODE
+    /**
+     * prepareEdit method.
+     * 
+     * @return 
+     */
     public String prepareEdit() {
         return prepareSelected("Edit");
     }
@@ -219,6 +256,11 @@ public class ArtefactController extends BaseController implements Serializable {
     */
     
     //START LEE BAKER GENERATED CODE
+    /**
+     * prepareUpdateVersion method.
+     * 
+     * @return 
+     */
     public String prepareUpdateVersion(){
         updating = true;
         old = current;
@@ -228,13 +270,25 @@ public class ArtefactController extends BaseController implements Serializable {
         return "Edit";
     }
     
+    /**
+     * copy method.
+     * 
+     * @param oldArtefact
+     * @param newArtefact
+     * @return 
+     */
     public Artefact copy(Artefact oldArtefact, Artefact newArtefact){
         newArtefact.setArtefactMajorVersionNumber(oldArtefact.getArtefactMajorVersionNumber());
         newArtefact.setArtefactMinorVersionNumber(oldArtefact.getArtefactMinorVersionNumber());
         newArtefact.setArtefactName(oldArtefact.getArtefactName());
         return newArtefact;
     }
-
+    
+    /**
+     * update method.
+     * 
+     * @return 
+     */
     public String update() {
         try {
             if(projectController.getCurrent() != null){
@@ -266,7 +320,12 @@ public class ArtefactController extends BaseController implements Serializable {
     /*  
     *   02/08/14 @Lee Baker
     *   Code added to delete entity instead of destroying it
-    */   
+    */  
+    /**
+     * delete method. 
+     * 
+     * @return 
+     */
     public String delete(){
         String result;
         result = prepareSelected("List");
@@ -277,7 +336,12 @@ public class ArtefactController extends BaseController implements Serializable {
         }
         return result;
     }
-
+    
+    /**
+     * deleteAndView method.
+     * 
+     * @return 
+     */
     public String deleteAndView() {
         performDelete();
         recreateModel();
@@ -290,7 +354,11 @@ public class ArtefactController extends BaseController implements Serializable {
             return "List";
         }
     }
-
+    
+    /**
+     * performDelete method.
+     * 
+     */
     private void performDelete() {
         setEntityInActive(current);
         try {
@@ -300,9 +368,13 @@ public class ArtefactController extends BaseController implements Serializable {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
         }
     }
-    //START LEE BAKER GENERATED CODE
+    //END LEE BAKER GENERATED CODE
     
     //START OF IDE MODIFIED CODE BY LEE BAKER 
+    /**
+     * updateCurrentItem method.
+     * 
+     */
     private void updateCurrentItem() {
         int count;
          if (projectController.getCurrent() != null){
@@ -332,6 +404,11 @@ public class ArtefactController extends BaseController implements Serializable {
     //END OF IDE MODIFIED CODE BY LEE BAKER 
     
     //START IDE GENERATED CODE
+    /**
+     * getItems method.
+     * 
+     * @return 
+     */
     public DataModel getItems() {
         if (items == null){
             items = getPagination().createPageDataModel();
@@ -339,41 +416,85 @@ public class ArtefactController extends BaseController implements Serializable {
         return items;
     }  
     
+    /**
+     * recreateModel method. 
+     */
     public void recreateModel() {
         items = null;
     }
-
+    
+    /**
+     * recreatePagination method. 
+     */
     private void recreatePagination() {
         pagination = null;
     }
-
+    
+    /**
+     * next method.
+     * 
+     * @return 
+     */
     public String next() {
         getPagination().nextPage();
         recreateModel();
         return "List";
     }
-
+    
+    /**
+     * previous method.
+     * 
+     * @return 
+     */
     public String previous() {
         getPagination().previousPage();
         recreateModel();
         return "List";
     }
-
+    
+    /**
+     * getItemsAvailableSelectMany method.
+     * 
+     * @return 
+     */
     public SelectItem[] getItemsAvailableSelectMany() {
         return JsfUtil.getSelectItems(ejbSaveRetrieve.findAllEntityActiveIsCurrentVersion(true, true), false);
     }
-
+    
+    /**
+     * getItemsAvailableSelectOne method.
+     * 
+     * @return 
+     */
     public SelectItem[] getItemsAvailableSelectOne() {
         return JsfUtil.getSelectItems(ejbSaveRetrieve.findAllEntityActiveIsCurrentVersion(true, true), true);
     }
-
+    
+    /**
+     * getArtefact method.
+     * 
+     * @param id
+     * @return 
+     */
     public Artefact getArtefact(java.lang.Integer id) {
         return ejbSaveRetrieve.find(id);
     }
-
+    
+    /**
+     * ArtefactControllerConverter class.
+     * 
+     */
     @FacesConverter(forClass = Artefact.class)
     public static class ArtefactControllerConverter implements Converter {
 
+        /**
+         * 
+         * 
+         * @param facesContext
+         * @param component
+         * @param value
+         * @return 
+         */
         @Override
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
             if (value == null || value.length() == 0) {
@@ -383,19 +504,36 @@ public class ArtefactController extends BaseController implements Serializable {
                     getValue(facesContext.getELContext(), null, "artefactController");
             return controller.getArtefact(getKey(value));
         }
-
+        
+        /**
+         * 
+         * @param value
+         * @return 
+         */
         java.lang.Integer getKey(String value) {
             java.lang.Integer key;
             key = Integer.valueOf(value);
             return key;
         }
-
+        
+        /**
+         * 
+         * @param value
+         * @return 
+         */
         String getStringKey(java.lang.Integer value) {
             StringBuilder sb = new StringBuilder();
             sb.append(value);
             return sb.toString();
         }
-
+        
+        /**
+         * 
+         * @param facesContext
+         * @param component
+         * @param object
+         * @return 
+         */
         @Override
         public String getAsString(FacesContext facesContext, UIComponent component, Object object) {
             if (object == null) {
