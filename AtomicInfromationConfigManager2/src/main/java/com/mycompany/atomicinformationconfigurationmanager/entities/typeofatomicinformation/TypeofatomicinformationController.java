@@ -17,6 +17,16 @@ import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 import javax.inject.Named;
 
+/**
+ *  TypeofatomicinformationController Class. This class inherits from the base class BaseController. The primary purpose
+ *  is to act as the Controller part of the MVC pattern for the Typeofatomicinformation Entity MVC. 
+ *  
+ *  The class is based on the NetBeans Controller template and modified extensively for this project 
+ * 
+ *  @author Lee Baker
+ *  @version 1.0
+ */
+
 @Named("typeofatomicinformationController")
 @SessionScoped
 public class TypeofatomicinformationController extends BaseController implements Serializable {
@@ -39,12 +49,12 @@ public class TypeofatomicinformationController extends BaseController implements
         }
         return current;
     }
-    
+
     public void setSelected(ValueChangeEvent event){
         current = (Typeofatomicinformation) getItems().getRowData();
         itemSelected = true;
     }
-    
+
     private String prepareSelected(String jsfPage){
         try {
             if (itemSelected == false)
@@ -101,7 +111,7 @@ public class TypeofatomicinformationController extends BaseController implements
 
     public String create() {
         try {
-            /*  
+            /*
             *   09/08/14 @Lee Baker
             *   Set entityActive = true when created
             */
@@ -129,7 +139,7 @@ public class TypeofatomicinformationController extends BaseController implements
             return null;
         }
     }
-    
+
     /*  31/08/14 Remarked out never used IDE Code
     public String destroy() {
         current = (Typeofatomicinformation) getItems().getRowData();
@@ -164,14 +174,14 @@ public class TypeofatomicinformationController extends BaseController implements
     */
 
 
-    /*  
+    /*
     *   09/08/14 @Lee Baker
     *   Code added to delete entity instead of destroying it
-    */       
+    */
      public String delete() {
         String result;
         result = prepareSelected("List");
-        if (result == "List"){
+        if ("List".equals(result)){
             performDelete();
             recreatePagination();
             recreateModel();
@@ -201,10 +211,10 @@ public class TypeofatomicinformationController extends BaseController implements
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
         }
     }
-    
-    
+
+
     private void updateCurrentItem() {
-        int count = getSaveRetrieve().countEntityActive(true, true);
+        int count = getSaveRetrieve().countEntityActiveIsCurrentVersion(true, true);
         if (selectedItemIndex >= count) {
             // selected index cannot be bigger than number of items:
             selectedItemIndex = count - 1;
@@ -224,9 +234,9 @@ public class TypeofatomicinformationController extends BaseController implements
         }
         return items;
     }
-    /* 
+    /*
     *   End of modified IDE code
-    */  
+    */
 
     public void recreateModel() {
         items = null;

@@ -17,9 +17,6 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
@@ -27,16 +24,30 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
-import org.odftoolkit.odfdom.doc.OdfDocument;
 
 /**
- *
- * @author Lee Baker
+ *  Artefact Class. This class is an object representation of the Artefact Entity in the database.
+ *  The Artefact class is an object representation for what will normally be a project document. The class
+ *  has attributes for the Artefact name and Reference and contain a copy of the file and filename for the Artefact.
+ * 
+ *  It is expected that the file will have a Major and Minor version number such as 1.2 or 1.A which are different
+ *  to the Artefact Class version number that is used by the object and other referencing objects to identify
+ *  its version in the database. 
+ *  
+ *  The class uses the JPA (Java Persistence API) to access and persist data in a relational database. 
+ *  The class also inherits several methods from the BaseEntity class. All Attributes of the  entity are 
+ *  Annotated according to the JPA specification to meet the underlying database schema.
+ *  
+ *  The class is based on the NetBeans Entity template and modified for this project including inheriting 
+ *  from the Base Entity and the addition of several NamedQueries with multiple Where clauses.
+ *  
+ *  No methods have been commented as they conform and are believed to be self explanatory and consistent with JPA   
+ *  @author Lee Baker
+ *  @version 1.0
  */
 @Entity
 @Table(name = "artefact")
@@ -64,11 +75,11 @@ import org.odftoolkit.odfdom.doc.OdfDocument;
     @NamedQuery(name = "Artefact.findByArtefactName", query = "SELECT a FROM Artefact a WHERE a.artefactName = :artefactName"),
     @NamedQuery(name = "Artefact.findByArtefactMajorVersionNumber", query = "SELECT a FROM Artefact a WHERE a.artefactMajorVersionNumber = :artefactMajorVersionNumber"),
     @NamedQuery(name = "Artefact.findByArtefactMinorVersionNumber", query = "SELECT a FROM Artefact a WHERE a.artefactMinorVersionNumber = :artefactMinorVersionNumber")})
-public class Artefact extends BaseEntity implements Serializable, Cloneable{
+public class Artefact extends BaseEntity implements Serializable{
 
+    private static final long serialVersionUID = 1L;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "artefactID")
     private Collection<Artefactatomicinformation> artefactatomicinformationCollection;
-    private static final long serialVersionUID = 1L;
    
     @Basic(optional = false)
     @NotNull
@@ -113,6 +124,13 @@ public class Artefact extends BaseEntity implements Serializable, Cloneable{
         this.artefactName = artefactName;
         this.artefactMajorVersionNumber = artefactMajorVersionNumber;
         this.artefactMinorVersionNumber = artefactMinorVersionNumber;
+    }
+
+    public Artefact(Integer artefactID, int versionNumber, boolean isCurrentVersion, boolean entityActive) {
+        this.id = artefactID;
+        this.versionNumber = versionNumber;
+        this.isCurrentVersion = isCurrentVersion;
+        this.entityActive = entityActive;
     }
 
     public byte[] getArtefactFile() {
@@ -195,13 +213,6 @@ public class Artefact extends BaseEntity implements Serializable, Cloneable{
     @Override
     public String toString() {
         return getArtefactName();
-    }
-
-    public Artefact(Integer artefactID, int versionNumber, boolean isCurrentVersion, boolean entityActive) {
-        this.id = artefactID;
-        this.versionNumber = versionNumber;
-        this.isCurrentVersion = isCurrentVersion;
-        this.entityActive = entityActive;
     }
 
     public Integer getArtefactID() {

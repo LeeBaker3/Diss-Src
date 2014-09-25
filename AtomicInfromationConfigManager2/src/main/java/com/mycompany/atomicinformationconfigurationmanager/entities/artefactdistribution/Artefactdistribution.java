@@ -24,12 +24,23 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- *
- * @author Lee Baker
+ *  Artefactdistribution Class. This class is an object representation of the Artefact Entity in the database.
+ *  The Artefactdistribution class is used to record when a version of an artefact has been distributed to a 
+ *  distribution recipient. 
+ * 
+ *  The class uses the JPA (Java Persistence API) to access and persist data in a relational database. 
+ *  The class also inherits several methods from the BaseEntity class. All Attributes of the  entity are 
+ *  Annotated according to the JPA specification to meet the underlying database schema.
+ *  
+ *  The class is based on the NetBeans Entity template and modified for this project including inheriting 
+ *  from the Base Entity and the addition of several NamedQueries with multiple Where clauses.
+ *  
+ *  No methods have been commented as they conform and are believed to be self explanatory and consistent with JPA   
+ *  @author Lee Baker
+ *  @version 1.0
  */
 @Entity
 @Table(name = "artefactdistribution")
@@ -81,7 +92,6 @@ public class Artefactdistribution extends BaseEntity implements Serializable {
 
     public Artefactdistribution(Integer artefactDistributionID, int methodOfDistributionID, int versionNumber, boolean isCurrentVersion, boolean entityActive, Date dateOfArtefactDistribution) {
         this.id = artefactDistributionID;
-        //this.methodOfDistributionID = methodOfDistributionID;
         this.versionNumber = versionNumber;
         this.isCurrentVersion = isCurrentVersion;
         this.entityActive = entityActive;

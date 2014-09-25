@@ -1,11 +1,9 @@
 package com.mycompany.atomicinformationconfigurationmanager.entities.atomicinformation;
 
-import com.mycompany.atomicinformationconfigurationmanager.entities.Artefactatomicinformation.Artefactatomicinformation;
 import com.mycompany.atomicinformationconfigurationmanager.entities.base.BaseController;
 import com.mycompany.atomicinformationconfigurationmanager.entities.project.ProjectController;
 import com.mycompany.atomicinformationconfigurationmanager.entities.util.JsfUtil;
 import com.mycompany.atomicinformationconfigurationmanager.entities.util.PaginationHelper;
-import com.mycompany.atomicinformationconfigurationmanager.businessrules.SelectedProject;
 import java.io.Serializable;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
@@ -21,9 +19,20 @@ import javax.faces.model.SelectItem;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+/**
+ *  AtomicinformationController Class. This class inherits from the base class BaseController. The primary purpose
+ *  is to act as the Controller part of the MVC pattern for the Atomicinformation Entity MVC. 
+ *  
+ *  The class is based on the NetBeans Controller template and modified extensively for this project 
+ * 
+ *  @author Lee Baker
+ *  @version 1.0
+ */
+
 @Named("atomicinformationController")
 @SessionScoped
 public class AtomicinformationController extends BaseController implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     private Atomicinformation current;
     private Atomicinformation old;
@@ -114,7 +123,7 @@ public class AtomicinformationController extends BaseController implements Seria
                         localCount = getSaveRetrieve().countEntityActiveAndProjectIDAndIsCurrentVersion(true, projectController.getCurrent(), true);
                     }
                     else{
-                        localCount = getSaveRetrieve().countEntityActive(true, true);
+                        localCount = getSaveRetrieve().countEntityActiveIsCurrentVersion(true, true);
                     }
                     return localCount;
                 }
@@ -297,7 +306,7 @@ public class AtomicinformationController extends BaseController implements Seria
     public String delete() {
         String result;
         result = prepareSelected("List");
-        if (result == "List"){
+        if ("List".equals(result)){
             performDelete();
             recreatePagination();
             recreateModel();
@@ -335,7 +344,7 @@ public class AtomicinformationController extends BaseController implements Seria
              count = getSaveRetrieve().countEntityActiveAndProjectIDAndIsCurrentVersion(true, projectController.getCurrent(), true);
          }
          else {
-             count = getSaveRetrieve().countEntityActive(true, true);
+             count = getSaveRetrieve().countEntityActiveIsCurrentVersion(true, true);
          }
                  
         if (selectedItemIndex >= count) {

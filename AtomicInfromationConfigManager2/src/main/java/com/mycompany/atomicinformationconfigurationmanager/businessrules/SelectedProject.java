@@ -20,15 +20,20 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 /**
- *
- * @author Lee Baker
+ *  SelectedProject Class. This class is used to hold a reference to the currently selected project
+ *  When a project is selected a call is made to all entity Models (MVC Pattern) to
+ *  recreate the model based on the project that has been selected
  * 
- * This class is used to hold a reference to currently selected project by the user
+ *  @author Lee Baker
+ *  @version 1.0
  */
+
+//START LEE BAKER GENERATED CODE
 @Named("selectedProject")
 @Stateful
 @SessionScoped
 public class SelectedProject implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     @Inject
     private ProjectController projectController;
@@ -47,7 +52,13 @@ public class SelectedProject implements Serializable {
     public Project getProject() {
         return project;
     }
-
+    
+    /**
+     *  setProject method. Recreates models of MVC pattern for entities that use the Project Primary Key
+     *  as a Foreign Key reference 
+     * 
+     *  @param project selected project
+     */
     public void setProject(Project project) {
         this.project = project;
         if(project != projectController.getCurrent()){
@@ -81,6 +92,5 @@ public class SelectedProject implements Serializable {
         }
         return true;
     }
-    
-    
 }
+//END LEE BAKER GENERATED CODE

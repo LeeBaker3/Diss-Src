@@ -19,9 +19,20 @@ import javax.faces.model.SelectItem;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+/**
+ *  DistributionrecipientController Class. This class inherits from the base class BaseController. The primary purpose
+ *  is to act as the Controller part of the MVC pattern for the Distributionrecipient Entity MVC. 
+ *  
+ *  The class is based on the NetBeans Controller template and modified extensively for this project 
+ * 
+ *  @author Lee Baker
+ *  @version 1.0
+ */
+
 @Named("distributionrecipientController")
 @SessionScoped
 public class DistributionrecipientController extends BaseController implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     private Distributionrecipient current;
     private boolean  itemSelected = false; //Set to true when an item is selected in the List DataTable
@@ -75,7 +86,7 @@ public class DistributionrecipientController extends BaseController implements S
 
                 /*
                 *   13/08/14    @Lee Baker
-                *   IDE Code modified to use countEntityActive() instead of count()
+                *   IDE Code modified to use countEntityActiveIsCurrentVersion() instead of count()
                 */
                 
                 
@@ -86,7 +97,7 @@ public class DistributionrecipientController extends BaseController implements S
                             localCount = getSaveRetrieve().countEntityActiveAndProjectIDAndIsCurrentVersion(projectController.getCurrent(), true, true);
                             }
                         else {
-                            localCount = getSaveRetrieve().countEntityActive(true, true);
+                            localCount = getSaveRetrieve().countEntityActiveIsCurrentVersion(true, true);
                         }
                     return localCount;
                 }
@@ -197,7 +208,7 @@ public class DistributionrecipientController extends BaseController implements S
     public String delete(){
         String result;
         result = prepareSelected("List");
-        if (result == "List"){
+        if ("List".equals(result)){
             performDelete();
             recreatePagination();
             recreateModel();
@@ -234,7 +245,7 @@ public class DistributionrecipientController extends BaseController implements S
             count = getSaveRetrieve().countEntityActiveAndProjectIDAndIsCurrentVersion(projectController.getCurrent(), true, true);
         }
         else {
-            count = getSaveRetrieve().countEntityActive(true, true);
+            count = getSaveRetrieve().countEntityActiveIsCurrentVersion(true, true);
         }
         
         if (selectedItemIndex >= count) {

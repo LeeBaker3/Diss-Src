@@ -17,9 +17,20 @@ import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 import javax.inject.Named;
 
+/**
+ *  ProjectController Class. This class inherits from the base class BaseController. The primary purpose
+ *  is to act as the Controller part of the MVC pattern for the Project Entity MVC. 
+ *  
+ *  The class is based on the NetBeans Controller template and modified extensively for this project 
+ * 
+ *  @author Lee Baker
+ *  @version 1.0
+ */
+
 @Named("projectController")
 @SessionScoped
 public class ProjectController extends BaseController implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     private Project current;
 
@@ -181,7 +192,7 @@ public class ProjectController extends BaseController implements Serializable {
      public String delete() {
         String result;
         result = prepareSelected("List");
-        if (result == "List"){
+        if ("List".equals(result)){
             performDelete();
             recreatePagination();
             recreateModel();
@@ -213,7 +224,7 @@ public class ProjectController extends BaseController implements Serializable {
     }
     
     private void updateCurrentItem() {
-        int count = getSaveRetrieve().countEntityActive(true, true);
+        int count = getSaveRetrieve().countEntityActiveIsCurrentVersion(true, true);
         if (selectedItemIndex >= count) {
             // selected index cannot be bigger than number of items:
             selectedItemIndex = count - 1;

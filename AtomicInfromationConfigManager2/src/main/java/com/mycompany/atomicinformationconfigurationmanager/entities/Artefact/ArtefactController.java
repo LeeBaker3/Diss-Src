@@ -6,8 +6,6 @@ import com.mycompany.atomicinformationconfigurationmanager.entities.util.JsfUtil
 import com.mycompany.atomicinformationconfigurationmanager.entities.util.PaginationHelper;
 import java.io.Serializable;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.component.UIComponent;
@@ -20,27 +18,36 @@ import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 import javax.inject.Inject;
 import javax.inject.Named;
-import sun.misc.VM;
 
+/**
+ *  ArtefactController Class. This class inherits from the base class BaseController. The primary purpose
+ *  is to act as the Controller part of the MVC pattern for the Artefact Entity MVC. 
+ *  
+ *  The class is based on the NetBeans Controller template and modified extensively for this project 
+ * 
+ *  @author Lee Baker
+ *  @version 1.0
+ */
+
+//START IDE GENERATED CODE
 @Named("artefactController")
 @SessionScoped
 public class ArtefactController extends BaseController implements Serializable {
-
-    private Artefact current;
-    private Artefact old;
-    private boolean  updating = false; //Set to true when making changes that update the version
-    private boolean  itemSelected = false; //Set to true when an item is selected in the List DataTable
-
+    private static final long serialVersionUID = 1L;
+    
+    private Artefact current;   
     private DataModel items = null;
     @EJB
     private com.mycompany.atomicinformationconfigurationmanager.entities.Artefact.ArtefactSaveRetrieve ejbSaveRetrieve;
     private PaginationHelper pagination;
     private int selectedItemIndex;
+    //END IDE GENERATED CODE
     
-    /*  @Lee Baker
-    *   02/08/14
-    *   Added to get current selected project
-    */
+    
+    //START LEE BAKER GENERATED CODE
+    private Artefact old;// Used to hold a reference to the old version of an Artefact entity when the entity is being updated
+    private boolean  updating = false; //Set to true when making changes that update the version of an Artefact entity
+    private boolean  itemSelected = false; //Set to true when an item is selected in the List DataTable
     
     @Inject
     private ProjectController projectController;
@@ -71,7 +78,18 @@ public class ArtefactController extends BaseController implements Serializable {
     public void setOld(Artefact old) {
         this.old = old;
     }
-
+    /**
+     * setSelected method. This method is used to set the 'current' property to reference 
+     * Artefact entity that has been selected in the DataModel
+     * @param event 
+     */
+    public void setSelected(ValueChangeEvent event){
+        current = (Artefact) getItems().getRowData();
+        itemSelected = true;
+    }
+    //END LEE BAKER GENERATED CODE
+    
+    //START IDE GENERATED CODE
     public Artefact getSelected() {
         if (current == null) {
             current = new Artefact();
@@ -79,12 +97,16 @@ public class ArtefactController extends BaseController implements Serializable {
         }
         return current;
     }
-    
-    public void setSelected(ValueChangeEvent event){
-        current = (Artefact) getItems().getRowData();
-        itemSelected = true;
-    }
-    
+    //END IDE GENERATED CODE
+
+    //START LEE BAKER GENERATED CODE
+    /**
+     * prepareSelected method. The purpose of this method is to identify if a Entity has 
+     * been selected in the DataModel and then return String that navigates to the correct 
+     * JSF page
+     * @param jsfPage
+     * @return 
+     */
     private String prepareSelected(String jsfPage){
         try {
             if (itemSelected == false)
@@ -99,18 +121,22 @@ public class ArtefactController extends BaseController implements Serializable {
             return null;
         }
     }
-
+    //END LEE BAKER GENERATED CODE
+    
+    //START IDE GENERATED CODE
     private ArtefactSaveRetrieve getSaveRetrieve() {
         return ejbSaveRetrieve;
     }
-         
+    //END IDE GENERATED CODE
+    
+    //START OF IDE MODIFIED CODE BY LEE BAKER 
     public PaginationHelper getPagination() {
         if (pagination == null) {
             pagination = new PaginationHelper(10) {
 
                 /* 
                 *   03/08/14 @Lee Baker
-                *   IDE Code modified to use countEntityActive() instead of count()
+                *   IDE Code modified to use countEntityActiveIsCurrentVersion() instead of count()
                 */   
                 @Override
                 public int getItemsCount() {
@@ -119,7 +145,7 @@ public class ArtefactController extends BaseController implements Serializable {
                             localCount = getSaveRetrieve().countEntityActiveAndProjectIDAndIsCurrentVersion(projectController.getCurrent(), true, true);
                             }
                         else {
-                            localCount = getSaveRetrieve().countEntityActive(true, true);
+                            localCount = getSaveRetrieve().countEntityActiveIsCurrentVersion(true, true);
                         }
                     return localCount;
                 }
@@ -178,16 +204,21 @@ public class ArtefactController extends BaseController implements Serializable {
             return null;
         }
     }
+    //START OF IDE MODIFIED CODE BY LEE BAKER 
     
+    //START IDE GENERATED CODE
     public String prepareEdit() {
         return prepareSelected("Edit");
     }
+    //END IDE GENERATED CODE
     
     /*
     *   24/08/14 @Lee Baker
     *   When recreationg a new artefact copies details of current artefact to a new
     *   new artefact and set the old one to not current.
     */
+    
+    //START LEE BAKER GENERATED CODE
     public String prepareUpdateVersion(){
         updating = true;
         old = current;
@@ -230,40 +261,7 @@ public class ArtefactController extends BaseController implements Serializable {
             }
             return null;
         }
-    }
-    
-    /* 31/08/14 Remarked out never used IDE Code
-    public String destroy() {
-        current = (Artefact) getItems().getRowData();
-        selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
-        performDestroy();
-        recreatePagination();
-        recreateModel();
-        return "List";
-    }
-    
-    private void performDestroy() {
-        try {
-            getSaveRetrieve().remove(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("ArtefactDeleted"));
-        } catch (Exception e) {
-            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
-        }
-    }
-
-    public String destroyAndView() {
-        performDestroy();
-        recreateModel();
-        updateCurrentItem();
-        if (selectedItemIndex >= 0) {
-            return "View";
-        } else {
-            // all items were removed - go back to list
-            recreateModel();
-            return "List";
-        }
-    }
-    */
+    }   
     
     /*  
     *   02/08/14 @Lee Baker
@@ -272,7 +270,7 @@ public class ArtefactController extends BaseController implements Serializable {
     public String delete(){
         String result;
         result = prepareSelected("List");
-        if (result == "List"){
+        if ("List".equals(result)){
             performDelete();
             recreatePagination();
             recreateModel();
@@ -302,14 +300,16 @@ public class ArtefactController extends BaseController implements Serializable {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
         }
     }
-
+    //START LEE BAKER GENERATED CODE
+    
+    //START OF IDE MODIFIED CODE BY LEE BAKER 
     private void updateCurrentItem() {
         int count;
          if (projectController.getCurrent() != null){
              count = getSaveRetrieve().countEntityActiveAndProjectIDAndIsCurrentVersion(projectController.getCurrent(), true, true);
          }
          else {
-             count = getSaveRetrieve().countEntityActive(true, true);
+             count = getSaveRetrieve().countEntityActiveIsCurrentVersion(true, true);
          }
         
         if (selectedItemIndex >= count) {
@@ -329,16 +329,15 @@ public class ArtefactController extends BaseController implements Serializable {
             }
         }
     }
-
+    //START OF IDE MODIFIED CODE BY LEE BAKER 
+    
+    //START IDE GENERATED CODE
     public DataModel getItems() {
         if (items == null){
             items = getPagination().createPageDataModel();
         }
         return items;
-    }
-    /* 
-    *   End of modified IDE code
-    */   
+    }  
     
     public void recreateModel() {
         items = null;
@@ -413,3 +412,4 @@ public class ArtefactController extends BaseController implements Serializable {
     }
 
 }
+//END IDE GENERATED CODE

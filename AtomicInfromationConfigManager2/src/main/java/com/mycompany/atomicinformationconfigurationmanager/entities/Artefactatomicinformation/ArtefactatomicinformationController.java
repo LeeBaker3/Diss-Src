@@ -4,11 +4,8 @@ import com.mycompany.atomicinformationconfigurationmanager.entities.Artefact.Art
 import com.mycompany.atomicinformationconfigurationmanager.entities.base.BaseController;
 import com.mycompany.atomicinformationconfigurationmanager.entities.util.JsfUtil;
 import com.mycompany.atomicinformationconfigurationmanager.entities.util.PaginationHelper;
-
 import java.io.Serializable;
-import java.util.HashSet;
 import java.util.ResourceBundle;
-import java.util.Set;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.component.UIComponent;
@@ -21,11 +18,21 @@ import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 import javax.inject.Inject;
 import javax.inject.Named;
-import org.apache.jasper.xmlparser.ParserUtils;
+
+/**
+ *  ArtefactatomicinformationController Class. This class inherits from the base class BaseController. The primary purpose
+ *  is to act as the Controller part of the MVC pattern for the Artefactatomicinformation Entity MVC. 
+ *  
+ *  The class is based on the NetBeans Controller template and modified extensively for this project 
+ * 
+ *  @author Lee Baker
+ *  @version 1.0
+ */
 
 @Named("artefactatomicinformationController")
 @SessionScoped
 public class ArtefactatomicinformationController extends BaseController implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     private Artefactatomicinformation current;
     private Artefactatomicinformation old;
@@ -99,7 +106,7 @@ public class ArtefactatomicinformationController extends BaseController implemen
                 
                 /* 
                 *   03/08/14 @Lee Baker
-                *   IDE Code modified to use countEntityActive() instead of count()
+                *   IDE Code modified to use countEntityActiveIsCurrentVersion() instead of count()
                 */ 
                 @Override
                 public int getItemsCount() {
@@ -108,7 +115,7 @@ public class ArtefactatomicinformationController extends BaseController implemen
                         localCount = getSaveRetrieve().countEntityActiveAndArtefactIDAndIsCurrentVersion(true, artefactController.getCurrent(), true);
                     }
                     else{
-                        localCount = getSaveRetrieve().countEntityActive(true, true);
+                        localCount = getSaveRetrieve().countEntityActiveIsCurrentVersion(true, true);
                     }
                     return localCount;
                 }
@@ -240,39 +247,6 @@ public class ArtefactatomicinformationController extends BaseController implemen
         }
     }
     
-    /*  31/08/14 Remarked out never used IDE Code
-    public String destroy() {
-        current = (Artefactatomicinformation) getItems().getRowData();
-        selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
-        performDestroy();
-        recreatePagination();
-        recreateModel();
-        return "List";
-    }
-
-    public String destroyAndView() {
-        performDestroy();
-        recreateModel();
-        updateCurrentItem();
-        if (selectedItemIndex >= 0) {
-            return "View";
-        } else {
-            // all items were removed - go back to list
-            recreateModel();
-            return "List";
-        }
-    }
-
-    private void performDestroy() {
-        try {
-            getSaveRetrieve().remove(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("ArtefactatomicinformationDeleted"));
-        } catch (Exception e) {
-            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
-        }
-    }
-    */
-    
     /*  
     *   09/08/14 @Lee Baker
     *   Code added to delete entity instead of destroying it
@@ -280,7 +254,7 @@ public class ArtefactatomicinformationController extends BaseController implemen
     public String delete() {
         String result;
         result = prepareSelected("List");
-        if (result == "List"){
+        if ("List".equals(result)){
             performDelete();
             recreatePagination();
             recreateModel();
@@ -317,7 +291,7 @@ public class ArtefactatomicinformationController extends BaseController implemen
             count = getSaveRetrieve().countEntityActiveAndArtefactIDAndIsCurrentVersion(true, artefactController.getCurrent(), true);
         }
         else {
-            count = getSaveRetrieve().countEntityActive(true, true);
+            count = getSaveRetrieve().countEntityActiveIsCurrentVersion(true, true);
         }
         if (selectedItemIndex >= count) {
             // selected index cannot be bigger than number of items:

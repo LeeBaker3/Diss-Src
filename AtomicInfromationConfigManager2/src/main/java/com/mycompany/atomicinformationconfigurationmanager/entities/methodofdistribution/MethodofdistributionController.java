@@ -17,9 +17,20 @@ import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 import javax.inject.Named;
 
+/**
+ *  MethodofdistributionController Class. This class inherits from the base class BaseController. The primary purpose
+ *  is to act as the Controller part of the MVC pattern for the Methodofdistribution Entity MVC. 
+ *  
+ *  The class is based on the NetBeans Controller template and modified extensively for this project 
+ * 
+ *  @author Lee Baker
+ *  @version 1.0
+ */
+
 @Named("methodofdistributionController")
 @SessionScoped
 public class MethodofdistributionController extends BaseController implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     private Methodofdistribution current;
     private boolean  itemSelected = false; //Set to true when an item is selected in the List DataTable
@@ -170,7 +181,7 @@ public class MethodofdistributionController extends BaseController implements Se
      public String delete() {
         String result;
         result = prepareSelected("List");
-        if (result == "List"){
+        if ("List".equals(result)){
             performDelete();
             recreatePagination();
             recreateModel();
@@ -202,7 +213,7 @@ public class MethodofdistributionController extends BaseController implements Se
     }
     
     private void updateCurrentItem() {
-        int count = getSaveRetrieve().countEntityActive(true, true);
+        int count = getSaveRetrieve().countEntityActiveIsCurrentVersion(true, true);
         if (selectedItemIndex >= count) {
             // selected index cannot be bigger than number of items:
             selectedItemIndex = count - 1;

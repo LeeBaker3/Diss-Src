@@ -12,27 +12,34 @@ import com.mycompany.atomicinformationconfigurationmanager.entities.base.BaseEnt
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.AttributeOverride;
-import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
- *
- * @author Lee Baker
+ *  Artefactatomicinformation Class. This class is an object representation of the Artefact Entity in the database. 
+ *  The Artefactatomicinformation class holds a reference to an Artefact entity and Atomic Information entity. The
+ *  main purpose of this entity is to resolve the issue of a many to many reference between Artefact  and 
+ *  Atomic Information entities in the database schema.
+ * 
+ *  The class uses the JPA (Java Persistence API) to access and persist data in a relational database. 
+ *  The class also inherits several methods from the BaseEntity class. All Attributes of the  entity are 
+ *  Annotated according to the JPA specification to meet the underlying database schema.
+ *  
+ *  The class is based on the NetBeans Entity template and modified for this project including inheriting 
+ *  from the Base Entity and the addition of several NamedQueries with multiple Where clauses.
+ *  
+ *  No methods have been commented as they conform and are believed to be self explanatory and consistent with JPA  
+ *  @author Lee Baker
+ *  @version 1.0
  */
 @Entity
 @Table(name = "artefactatomicinformation")
