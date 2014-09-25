@@ -9,7 +9,7 @@ import javax.persistence.metamodel.CollectionAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@Generated(value="EclipseLink-2.5.1.v20130918-rNA", date="2014-09-16T23:56:10")
+@Generated(value="EclipseLink-2.5.1.v20130918-rNA", date="2014-09-22T23:05:12")
 @StaticMetamodel(Artefact.class)
 public class Artefact_ extends BaseEntity_ {
 

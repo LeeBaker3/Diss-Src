@@ -22,35 +22,43 @@
                     </rich:toolbar>
                     <rich:toolbar>
                         <rich:dropDownMenu rendered="#{projectController.current !=null}" label="#{bundle.DropDownMenuAtomicinformation}">
-                            <rich:menuItem label="#{bundle.MenuItemCreateAtomicInformationLink}" action="#{atomicinformationController.prepareCreate}"/>
+                            <rich:menuItem label="#{bundle.MenuItemCreateAtomicInformationLink}" action="#{createArtefactAtomicInfoRecords.create}"/>
                         </rich:dropDownMenu>
                     </rich:toolbar>
                     <h:panelGroup rendered="#{createArtefactAtomicInfoRecords.size > 0}">
-                        <h:dataTable value="#{createArtefactAtomicInfoRecords.listAtomicInformation}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:dataTable value="#{createArtefactAtomicInfoRecords.newItems}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
                             <h:column>
                                 <f:facet name="header">
                                     <h:outputText value="#{bundle.ListAtomicinformationTitle_content}"/>
                                 </f:facet>
-                                <h:outputText value="#{listAtomicInformation.content}"/>
+                                <h:outputText value="#{item.content}"/>
                             </h:column>
                             <h:column>
                                 <f:facet name="header">
                                     <h:outputText value="#{bundle.ListAtomicinformationTitle_typeOfAtomicInformationID}"/>
                                 </f:facet>
-                                <h:outputText value="#{listAtomicInformation.typeOfAtomicInformationID.type}"/>
+                                <h:outputText value="#{item.typeOfAtomicInformationID.type}"/>
                             </h:column>
                             <h:column>
                                 <f:facet name="header">
                                     <h:outputText value="#{bundle.ListAtomicinformationTitle_projectID}"/>
                                 </f:facet>
-                                <h:outputText value="#{listAtomicInformation.projectID.projectName} #{listAtomicInformation.projectID.projectReference}"/>
+                                <h:outputText value="#{item.projectID.projectName} #{item.projectID.projectReference}"/>
                             </h:column>
-                            <!--h:column>
+                            <h:column>
                                 <f:facet name="header">
                                     <h:outputText value="#{bundle.ListAtomicinformationTitle_versionNumber}"/>
                                 </f:facet>
-                                <h:outputText value="#{listAtomicInformation.versionNumber}" />
-                            </h:column-->
+                                <h:outputText value="#{item.versionNumber}" />
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListAtomicinformationTitle_select}"/>
+                                </f:facet>
+                                <h:selectBooleanCheckbox value="#{createArtefactAtomicInfoRecords.checked[item.id]}">
+                                    <f:ajax event="click" execute="@form" render="@form"/>
+                                </h:selectBooleanCheckbox>
+                            </h:column>
                         </h:dataTable>
                     </h:panelGroup>
                 </rich:panel>
