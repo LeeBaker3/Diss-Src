@@ -27,18 +27,19 @@ import javax.inject.Named;
  *  @version 1.0
  */
 
+//START IDE GENERATED CODE
 @Named("methodofdistributionController")
 @SessionScoped
 public class MethodofdistributionController extends BaseController implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private Methodofdistribution current;
+    private Methodofdistribution current;// Current Methodofdistribution entity that has been selected/viewed/edited/created 
     private boolean  itemSelected = false; //Set to true when an item is selected in the List DataTable
-    private DataModel items = null;
+    private DataModel items = null;// This is affectively the Model part of the MVC pattern
     @EJB
     private com.mycompany.atomicinformationconfigurationmanager.entities.methodofdistribution.MethodofdistributionSaveRetrieve ejbSaveRetrieve;
     private PaginationHelper pagination;
-    private int selectedItemIndex;
+    private int selectedItemIndex;// Selected entity Index in the DataModel items
 
     public MethodofdistributionController() {
     }
@@ -50,12 +51,14 @@ public class MethodofdistributionController extends BaseController implements Se
         }
         return current;
     }
+    //END IDE GENERATED CODE
     
+    //START LEE BAKER GENERATED CODE
     public void setSelected(ValueChangeEvent event){
         current = (Methodofdistribution) getItems().getRowData();
         itemSelected = true;
     }
-    
+   
     private String prepareSelected(String jsfPage){
         try {
             if (itemSelected == false)
@@ -70,7 +73,9 @@ public class MethodofdistributionController extends BaseController implements Se
             return null;
         }
     }
-
+     //END LEE BAKER GENERATED CODE
+    
+    //START IDE GENERATED CODE
     private MethodofdistributionSaveRetrieve getSaveRetrieve() {
         return ejbSaveRetrieve;
     }
@@ -92,24 +97,29 @@ public class MethodofdistributionController extends BaseController implements Se
         }
         return pagination;
     }
-
+    //END IDE GENERATED CODE
+    
+    //START OF IDE MODIFIED CODE BY LEE BAKER 
     public String prepareList() {
         recreateModel();
         itemSelected = false;
         return "List";
     }
+    //END OF IDE MODIFIED CODE BY LEE BAKER 
 
     public String prepareView() {
         return prepareSelected("View");
     }
-
+    //START LEE BAKER GENERATED CODE
     public String prepareCreate() {
         current = new Methodofdistribution();
         current.setIsCurrentVersion(true);
         selectedItemIndex = -1;
         return "Create";
     }
-
+    //END LEE BAKER GENERATED CODE
+    
+    //START OF IDE MODIFIED CODE BY LEE BAKER 
     public String create() {
         try {
             /*  
@@ -125,7 +135,9 @@ public class MethodofdistributionController extends BaseController implements Se
             return null;
         }
     }
-
+    //END OF IDE MODIFIED CODE BY LEE BAKER 
+    
+    //START IDE GENERATED CODE
     public String prepareEdit() {
         return prepareSelected("Edit");
     }
@@ -140,44 +152,13 @@ public class MethodofdistributionController extends BaseController implements Se
             return null;
         }
     }
-    
-    /*  31/08/14 Remarked out never used IDE Code
-    public String destroy() {
-        current = (Methodofdistribution) getItems().getRowData();
-        selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
-        performDestroy();
-        recreatePagination();
-        recreateModel();
-        return "List";
-    }
-
-    public String destroyAndView() {
-        performDestroy();
-        recreateModel();
-        updateCurrentItem();
-        if (selectedItemIndex >= 0) {
-            return "View";
-        } else {
-            // all items were removed - go back to list
-            recreateModel();
-            return "List";
-        }
-    }
-
-    private void performDestroy() {
-        try {
-            getSaveRetrieve().remove(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("MethodofdistributionDeleted"));
-        } catch (Exception e) {
-            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
-        }
-    }
-    */
+    //END IDE GENERATED CODE
 
     /*  
     *   09/08/14 @Lee Baker
     *   Code added to delete entity instead of destroying it
-    */       
+    */
+    //START LEE BAKER GENERATED CODE
      public String delete() {
         String result;
         result = prepareSelected("List");
@@ -211,7 +192,9 @@ public class MethodofdistributionController extends BaseController implements Se
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
         }
     }
+    //START LEE BAKER GENERATED CODE
     
+    //START IDE GENERATED CODE
     private void updateCurrentItem() {
         int count = getSaveRetrieve().countEntityActiveIsCurrentVersion(true, true);
         if (selectedItemIndex >= count) {
@@ -232,10 +215,7 @@ public class MethodofdistributionController extends BaseController implements Se
             items = getPagination().createPageDataModel();
         }
         return items;
-    }
-    /* 
-    *   End of modified IDE code
-    */    
+    }  
 
     public void recreateModel() {
         items = null;
@@ -308,5 +288,5 @@ public class MethodofdistributionController extends BaseController implements Se
         }
 
     }
-
 }
+ //END IDE GENERATED CODE

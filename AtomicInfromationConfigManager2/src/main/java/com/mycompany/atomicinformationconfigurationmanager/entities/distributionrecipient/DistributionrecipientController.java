@@ -29,20 +29,22 @@ import javax.inject.Named;
  *  @version 1.0
  */
 
+//START IDE GENERATED CODE
 @Named("distributionrecipientController")
 @SessionScoped
 public class DistributionrecipientController extends BaseController implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private Distributionrecipient current;
+    private Distributionrecipient current;// Current Distributionrecipient entity that has been selected/viewed/edited/created   
     private boolean  itemSelected = false; //Set to true when an item is selected in the List DataTable
-    private DataModel items = null;
+    private DataModel items = null;// This is affectively the Model part of the MVC pattern
     @EJB
     private com.mycompany.atomicinformationconfigurationmanager.entities.distributionrecipient.DistributionrecipientSaveRetrieve ejbSaveRetrieve;
     private PaginationHelper pagination;
-    private int selectedItemIndex;
+    private int selectedItemIndex;// Selected entity Index in the DataModel items
+    //END IDE GENERATED CODE
     
-    
+    //START LEE BAKER GENERATED CODE
     @Inject ProjectController projectController;
 
     public DistributionrecipientController() {
@@ -79,7 +81,9 @@ public class DistributionrecipientController extends BaseController implements S
     private DistributionrecipientSaveRetrieve getSaveRetrieve() {
         return ejbSaveRetrieve;
     }
-
+    //END LEE BAKER GENERATED CODE
+    
+    //START OF IDE MODIFIED CODE BY LEE BAKER 
     public PaginationHelper getPagination() {
         if (pagination == null) {
             pagination = new PaginationHelper(10) {
@@ -152,7 +156,9 @@ public class DistributionrecipientController extends BaseController implements S
             return null;
         }
     }
-
+    //END OF IDE MODIFIED CODE BY LEE BAKER 
+    
+    //START IDE GENERATED CODE
     public String prepareEdit() {
         return  prepareSelected("Edit");
     }
@@ -167,44 +173,13 @@ public class DistributionrecipientController extends BaseController implements S
             return null;
         }
     }
-    
-    /* 31/08/14 Remarked out never used IDE Code
-    public String destroy() {
-        current = (Distributionrecipient) getItems().getRowData();
-        selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
-        performDestroy();
-        recreatePagination();
-        recreateModel();
-        return "List";
-    }
-
-    public String destroyAndView() {
-        performDestroy();
-        recreateModel();
-        updateCurrentItem();
-        if (selectedItemIndex >= 0) {
-            return "View";
-        } else {
-            // all items were removed - go back to list
-            recreateModel();
-            return "List";
-        }
-    }
-
-    private void performDestroy() {
-        try {
-            getSaveRetrieve().remove(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("DistributionrecipientDeleted"));
-        } catch (Exception e) {
-            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
-        }
-    }
-    */
+    //END IDE GENERATED CODE
 
     /*  
     *   02/08/14 @Lee Baker
     *   Code added to delete entity instead of destroying it
-    */   
+    */
+    //START LEE BAKER GENERATED CODE
     public String delete(){
         String result;
         result = prepareSelected("List");
@@ -238,7 +213,9 @@ public class DistributionrecipientController extends BaseController implements S
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
         }
     }
+    //END LEE BAKER GENERATED CODE
     
+    //START OF IDE MODIFIED CODE BY LEE BAKER 
     private void updateCurrentItem() {
         int count;
         if (projectController.getCurrent() != null){
@@ -265,16 +242,16 @@ public class DistributionrecipientController extends BaseController implements S
             }
         }
     }
-
+    //END OF IDE MODIFIED CODE BY LEE BAKER 
+    
+    //START IDE GENERATED CODE
     public DataModel getItems() {
         if (items == null){
            items = getPagination().createPageDataModel(); 
         }
         return items;
     }
-    /* 
-    *   End of modified IDE code
-    */  
+  
 
     public void recreateModel() {
         items = null;
@@ -347,5 +324,5 @@ public class DistributionrecipientController extends BaseController implements S
         }
 
     }
-
 }
+//END IDE GENERATED CODE

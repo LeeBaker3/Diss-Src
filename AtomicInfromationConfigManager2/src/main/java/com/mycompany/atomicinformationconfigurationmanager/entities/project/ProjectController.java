@@ -26,23 +26,22 @@ import javax.inject.Named;
  *  @author Lee Baker
  *  @version 1.0
  */
-
+ 
+//START IDE GENERATED CODE/
 @Named("projectController")
 @SessionScoped
 public class ProjectController extends BaseController implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private Project current;
-
+    private Project current;// Current Project entity that has been selected/viewed/edited/created
     private boolean  itemSelected = false; //Set to true when an item is selected in the List DataTable
-    private DataModel items = null;
+    private DataModel items = null;// This is affectively the Model part of the MVC pattern
     @EJB
     private com.mycompany.atomicinformationconfigurationmanager.entities.project.ProjectSaveRetrieve ejbSaveRetrieve;
     private PaginationHelper pagination;
-    private int selectedItemIndex;
+    private int selectedItemIndex;// Selected entity Index in the DataModel items
     
-
-
+   
     public ProjectController() {
     }
 
@@ -53,7 +52,9 @@ public class ProjectController extends BaseController implements Serializable {
         }
         return current;
     }
+    //END IDE GENERATED CODE
     
+    //START LEE BAKER GENERATED CODE
     public void setSelected(ValueChangeEvent event){
         current = (Project) getItems().getRowData();
         itemSelected = true;
@@ -81,11 +82,13 @@ public class ProjectController extends BaseController implements Serializable {
     public void setCurrent(Project current) {
         this.current = current;
     }
-
+    //END LEE BAKER GENERATED CODE
+    
+    //START IDE GENERATED CODE
     private ProjectSaveRetrieve getSaveRetrieve() {
         return ejbSaveRetrieve;
     }
-
+    
     public PaginationHelper getPagination() {
         if (pagination == null) {
             pagination = new PaginationHelper(10) {
@@ -103,15 +106,17 @@ public class ProjectController extends BaseController implements Serializable {
         }
         return pagination;
     }
-
+    
+    public String prepareView() {
+        return prepareSelected("View");
+    }
+    //END IDE GENERATED CODE
+    
+    //START OF IDE MODIFIED CODE BY LEE BAKER
     public String prepareList() {
         recreateModel();
         itemSelected = false;
         return "List";
-    }
-
-    public String prepareView() {
-        return prepareSelected("View");
     }
 
     public String prepareCreate() {
@@ -136,7 +141,9 @@ public class ProjectController extends BaseController implements Serializable {
             return null;
         }
     }
-
+    //END OF IDE MODIFIED CODE BY LEE BAKER
+    
+    //START IDE GENERATED CODE
     public String prepareEdit() {
         return prepareSelected("Edit");
     }
@@ -151,44 +158,13 @@ public class ProjectController extends BaseController implements Serializable {
             return null;
         }
     }
-    
-    /*  31/08/14 Remarked out never used IDE Code
-    public String destroy() {
-        current = (Project) getItems().getRowData();
-        selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
-        performDestroy();
-        recreatePagination();
-        recreateModel();
-        return "List";
-    }
-
-    public String destroyAndView() {
-        performDestroy();
-        recreateModel();
-        updateCurrentItem();
-        if (selectedItemIndex >= 0) {
-            return "View";
-        } else {
-            // all items were removed - go back to list
-            recreateModel();
-            return "List";
-        }
-    }
-
-    private void performDestroy() {
-        try {
-            getSaveRetrieve().remove(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("ProjectDeleted"));
-        } catch (Exception e) {
-            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
-        }
-    }
-    */
+    //END IDE GENERATED CODE
 
     /*  
     *   09/08/14 @Lee Baker
     *   Code added to delete entity instead of destroying it
-    */       
+    */
+    //START LEE BAKER GENERATED CODE
      public String delete() {
         String result;
         result = prepareSelected("List");
@@ -222,7 +198,9 @@ public class ProjectController extends BaseController implements Serializable {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
         }
     }
+    //START LEE BAKER GENERATED CODE
     
+    //START IDE GENERATED CODE
     private void updateCurrentItem() {
         int count = getSaveRetrieve().countEntityActiveIsCurrentVersion(true, true);
         if (selectedItemIndex >= count) {
@@ -244,10 +222,6 @@ public class ProjectController extends BaseController implements Serializable {
         }
         return items;
     }
-    /* 
-    *   End of modified IDE code
-    */      
-    
 
     public void recreateModel() {
         items = null;
@@ -320,5 +294,5 @@ public class ProjectController extends BaseController implements Serializable {
         }
 
     }
-
 }
+//END IDE GENERATED CODE

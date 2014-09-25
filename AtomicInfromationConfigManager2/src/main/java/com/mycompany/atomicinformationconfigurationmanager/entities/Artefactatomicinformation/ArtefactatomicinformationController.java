@@ -29,22 +29,26 @@ import javax.inject.Named;
  *  @version 1.0
  */
 
+//START IDE GENERATED CODE
 @Named("artefactatomicinformationController")
 @SessionScoped
 public class ArtefactatomicinformationController extends BaseController implements Serializable {
     private static final long serialVersionUID = 1L;
+    
+    private Artefactatomicinformation current;// Current Artefactatomicinformation entity that has been selected/viewed/edited/created  
 
-    private Artefactatomicinformation current;
-    private Artefactatomicinformation old;
-    private boolean updating = false;
-    private boolean  itemSelected = false; //Set to true when an item is selected in the List DataTable
-    private Boolean selectedFromArtefact = false;
-
-    private DataModel items = null;
+    private DataModel items = null;// This is affectively the Model part of the MVC pattern
     @EJB
     private com.mycompany.atomicinformationconfigurationmanager.entities.Artefactatomicinformation.ArtefactatomicinformationSaveRetrieve ejbSaveRetrieve;
     private PaginationHelper pagination;
-    private int selectedItemIndex;
+    private int selectedItemIndex;// Selected entity Index in the DataModel items
+    //END IDE GENERATED CODE
+    
+    //START LEE BAKER GENERATED CODE
+    private Artefactatomicinformation old;// Used to hold a reference to the old version of an Artefactatomicinformation entity when the entity is being updated
+    private boolean updating = false;//Set to true when making changes that update the version of an Artefactatomicinformation entity
+    private boolean itemSelected = false; //Set to true when an item is selected in the List DataTable
+    private Boolean selectedFromArtefact = false;// This is set to true if created from the Artefactatomicinformation View to navigate back to the correct Artefact entity
     
     @Inject
     private ArtefactController artefactController; 
@@ -67,7 +71,14 @@ public class ArtefactatomicinformationController extends BaseController implemen
     public void setUpdating(boolean updating) {
         this.updating = updating;
     }
-
+    
+    public void setSelected(ValueChangeEvent event){
+        current = (Artefactatomicinformation) getItems().getRowData();
+        itemSelected = true;
+    }
+    //END LEE BAKER GENERATED CODE
+    
+    //START IDE GENERATED CODE
     public Artefactatomicinformation getSelected() {
         if (current == null) {
             current = new Artefactatomicinformation();
@@ -75,12 +86,9 @@ public class ArtefactatomicinformationController extends BaseController implemen
         }
         return current;
     }
+    //END IDE GENERATED CODE
     
-    public void setSelected(ValueChangeEvent event){
-        current = (Artefactatomicinformation) getItems().getRowData();
-        itemSelected = true;
-    }
-    
+    //START LEE BAKER GENERATED CODE
     private String prepareSelected(String jsfPage){
         try {
             if (itemSelected == false)
@@ -95,11 +103,13 @@ public class ArtefactatomicinformationController extends BaseController implemen
             return null;
         }
     }
-
+    //END LEE BAKER GENERATED CODE
+    
     public ArtefactatomicinformationSaveRetrieve getSaveRetrieve() {
         return ejbSaveRetrieve;
     }
-
+    
+    //START OF IDE MODIFIED CODE BY LEE BAKER 
     public PaginationHelper getPagination() {
         if (pagination == null) {
             pagination = new PaginationHelper(10) {
@@ -143,7 +153,7 @@ public class ArtefactatomicinformationController extends BaseController implemen
         itemSelected = false;
         return "List";
     }
-
+    
     public String prepareView() {
         return prepareSelected("View");
     }
@@ -154,7 +164,9 @@ public class ArtefactatomicinformationController extends BaseController implemen
         selectedItemIndex = -1;
         return "/Faces/artefactatomicinformation/Create";
     }
+    //END OF IDE MODIFIED CODE BY LEE BAKER
     
+    //START LEE BAKER GENERATED CODE
     public String prepareCreateFromArtefact(){
         current = new Artefactatomicinformation();
         current.setIsCurrentVersion(true);
@@ -162,7 +174,9 @@ public class ArtefactatomicinformationController extends BaseController implemen
         selectedFromArtefact = true;
         return "/Faces/artefactatomicinformation/CreateFromArtefact";
     }
-
+    //END LEE BAKER GENERATED CODE
+    
+    //START OF IDE MODIFIED CODE BY LEE BAKER 
     public String create(String returnMethod) {
         try {
             /*  
@@ -198,7 +212,8 @@ public class ArtefactatomicinformationController extends BaseController implemen
             return null;
         }
     }
-
+    //END OF IDE MODIFIED CODE BY LEE BAKER 
+    
     public String prepareEdit() {
         return prepareSelected("Edit");
     }
@@ -208,6 +223,7 @@ public class ArtefactatomicinformationController extends BaseController implemen
     *   When recreationg a new artefact copies details of current artefact to a new
     *   new artefact and set the old one to not current.
     */
+    //START LEE BAKER GENERATED CODE
     public String prepareUpdateVersion(){
         updating = true;
         old = current;
@@ -222,8 +238,7 @@ public class ArtefactatomicinformationController extends BaseController implemen
         newArtefactatomicinformation.setArtefactID(oldArtefactatomicinformation.getArtefactID());
         return newArtefactatomicinformation;
     }
-    
-    
+     
     public String update() {
         try {
             if (updating == true){
@@ -284,7 +299,9 @@ public class ArtefactatomicinformationController extends BaseController implemen
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
         }
     }
+    //END LEE BAKER GENERATED CODE
     
+   //START OF IDE MODIFIED CODE BY LEE BAKER 
     private void updateCurrentItem() {
         int count;
         if(artefactController.getCurrent() != null){
@@ -308,17 +325,16 @@ public class ArtefactatomicinformationController extends BaseController implemen
             current = getSaveRetrieve().findRangeEntityActiveIsCurrentVersion(new int[]{selectedItemIndex, selectedItemIndex + 1},true, true).get(0);
         }
     }
-
+    //END OF IDE MODIFIED CODE BY LEE BAKER 
+    
+    //START IDE GENERATED CODE
     public DataModel getItems() {
         if (items == null){
             items = getPagination().createPageDataModel();
         }
         return items;
     }
-    /* 
-    *   End of modified IDE code
-    */  
-
+    
     public void recreateModel() {
         items = null;
     }
@@ -390,5 +406,5 @@ public class ArtefactatomicinformationController extends BaseController implemen
         }
 
     }
-
 }
+//END IDE GENERATED CODE

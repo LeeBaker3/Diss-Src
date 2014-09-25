@@ -35,12 +35,12 @@ import javax.inject.Named;
 public class ArtefactController extends BaseController implements Serializable {
     private static final long serialVersionUID = 1L;
     
-    private Artefact current;   
-    private DataModel items = null;
+    private Artefact current;// Current Artefact entity that has been selected/viewed/edited/created   
+    private DataModel items = null;// This is affectively the Model part of the MVC pattern
     @EJB
     private com.mycompany.atomicinformationconfigurationmanager.entities.Artefact.ArtefactSaveRetrieve ejbSaveRetrieve;
     private PaginationHelper pagination;
-    private int selectedItemIndex;
+    private int selectedItemIndex;// Selected entity Index in the DataModel items
     //END IDE GENERATED CODE
     
     
@@ -329,7 +329,7 @@ public class ArtefactController extends BaseController implements Serializable {
             }
         }
     }
-    //START OF IDE MODIFIED CODE BY LEE BAKER 
+    //END OF IDE MODIFIED CODE BY LEE BAKER 
     
     //START IDE GENERATED CODE
     public DataModel getItems() {

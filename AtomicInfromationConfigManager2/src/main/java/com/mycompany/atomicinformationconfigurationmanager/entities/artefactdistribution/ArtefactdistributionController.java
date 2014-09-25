@@ -29,27 +29,28 @@ import javax.inject.Named;
  *  @version 1.0
  */
 
+//START IDE GENERATED CODE
 @Named("artefactdistributionController")
 @SessionScoped
 public class ArtefactdistributionController extends BaseController implements Serializable {
 
-    private Artefactdistribution current;
-    private boolean  itemSelected = false; //Set to true when an item is selected in the List DataTable
-    private DataModel items = null;
+    private Artefactdistribution current;;// Current Artefactdistribution entity that has been selected/viewed/edited/created  
+    private DataModel items = null;// This is affectively the Model part of the MVC pattern
     @EJB
     private com.mycompany.atomicinformationconfigurationmanager.entities.artefactdistribution.ArtefactdistributionSaveRetrieve ejbSaveRetrieve;
     private PaginationHelper pagination;
-    private int selectedItemIndex;
+    private int selectedItemIndex;// Selected entity Index in the DataModel items
+    //END IDE GENERATED CODE
     
-   
+    //START LEE BAKER GENERATED CODE
+    private boolean  itemSelected = false; //Set to true when an item is selected in the List DataTable
+    private Boolean selectedFromArtefact = false;// This is set to true if created from the Artefact View to navigate back to the correct Artefact entity
     /*  @Lee Baker
     *   10/08/14
     *   Added to get current selected project
     */
     @Inject
     private ArtefactController artefactController;
-    
-    private Boolean selectedFromArtefact = false;
 
     public ArtefactdistributionController() {
     }
@@ -85,6 +86,7 @@ public class ArtefactdistributionController extends BaseController implements Se
     private ArtefactdistributionSaveRetrieve getSaveRetrieve() {
         return ejbSaveRetrieve;
     }
+    //END LEE BAKER GENERATED CODE
 
     public PaginationHelper getPagination() {
         if (pagination == null) {
@@ -141,6 +143,7 @@ public class ArtefactdistributionController extends BaseController implements Se
         return "/Faces/artefactdistribution/Create";
     }
     
+    //START LEE BAKER GENERATED CODE
     public String prepareCreateFromArtefact() {
         current = new Artefactdistribution();
         current.setIsCurrentVersion(true);
@@ -148,7 +151,9 @@ public class ArtefactdistributionController extends BaseController implements Se
         selectedFromArtefact = true;
         return "/Faces/artefactdistribution/CreateFromArtefact";
     }
-
+    //END LEE BAKER GENERATED CODE
+    
+    //START OF IDE MODIFIED CODE BY LEE BAKER
     public String create(String returnMethod) {
         try {
             /*  
@@ -199,44 +204,13 @@ public class ArtefactdistributionController extends BaseController implements Se
             return null;
         }
     }
-    
-    /* 31/08/14 Remarked out never used IDE Code
-    public String destroy() {
-        current = (Artefactdistribution) getItems().getRowData();
-        selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
-        performDestroy();
-        recreatePagination();
-        recreateModel();
-        return "List";
-    }
-
-    public String destroyAndView() {
-        performDestroy();
-        recreateModel();
-        updateCurrentItem();
-        if (selectedItemIndex >= 0) {
-            return "View";
-        } else {
-            // all items were removed - go back to list
-            recreateModel();
-            return "List";
-        }
-    }
-
-    private void performDestroy() {
-        try {
-            getSaveRetrieve().remove(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("ArtefactdistributionDeleted"));
-        } catch (Exception e) {
-            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
-        }
-    }
-    */
+    //END OF IDE MODIFIED CODE BY LEE BAKER
     
     /*  
     *   10/08/14 @Lee Baker
     *   Code added to delete entity instead of destroying it
-    */   
+    */
+    //START LEE BAKER GENERATED CODE
     public String delete() {
         String result;
         result = prepareSelected("List");
@@ -270,7 +244,9 @@ public class ArtefactdistributionController extends BaseController implements Se
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
         }
     }
-
+    //END LEE BAKER GENERATED CODE
+    
+    //START OF IDE MODIFIED CODE BY LEE BAKER
     private void updateCurrentItem() {
         int count = getSaveRetrieve().count();
         if (artefactController.getCurrent() !=null){
@@ -294,16 +270,15 @@ public class ArtefactdistributionController extends BaseController implements Se
             current = getSaveRetrieve().findRangeEntityActiveIsCurrentVersion(new int[]{selectedItemIndex, selectedItemIndex + 1},true, true).get(0);
         }
     }
-
+    //END OF IDE MODIFIED CODE BY LEE BAKER
+    
+    //START IDE GENERATED CODE
     public DataModel getItems() {
         if (items == null){
             items = getPagination().createPageDataModel();
         }
         return items;
     }
-    /* 
-    *   End of modified IDE code
-    */   
 
     public void recreateModel() {
         items = null;
@@ -374,6 +349,6 @@ public class ArtefactdistributionController extends BaseController implements Se
                 throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Artefactdistribution.class.getName());
             }
         }
-
     }
 }
+//END IDE GENERATED CODE

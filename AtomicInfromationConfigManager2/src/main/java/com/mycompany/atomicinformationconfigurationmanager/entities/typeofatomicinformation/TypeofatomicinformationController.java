@@ -27,17 +27,18 @@ import javax.inject.Named;
  *  @version 1.0
  */
 
+//START IDE GENERATED CODE
 @Named("typeofatomicinformationController")
 @SessionScoped
 public class TypeofatomicinformationController extends BaseController implements Serializable {
 
-    private Typeofatomicinformation current;
+    private Typeofatomicinformation current;// Current Typeofatomicinformation entity that has been selected/viewed/edited/created
     private boolean  itemSelected = false; //Set to true when an item is selected in the List DataTable
-    private DataModel items = null;
+    private DataModel items = null;// This is affectively the Model part of the MVC pattern
     @EJB
     private com.mycompany.atomicinformationconfigurationmanager.entities.typeofatomicinformation.TypeofatomicinformationSaveRetrieve ejbSaveRetrieve;
     private PaginationHelper pagination;
-    private int selectedItemIndex;
+    private int selectedItemIndex;// Selected entity Index in the DataModel items
 
     public TypeofatomicinformationController() {
     }
@@ -49,11 +50,14 @@ public class TypeofatomicinformationController extends BaseController implements
         }
         return current;
     }
-
+    //END IDE GENERATED CODE
+    
+    //START LEE BAKER GENERATED CODE
     public void setSelected(ValueChangeEvent event){
         current = (Typeofatomicinformation) getItems().getRowData();
         itemSelected = true;
     }
+   
 
     private String prepareSelected(String jsfPage){
         try {
@@ -69,7 +73,9 @@ public class TypeofatomicinformationController extends BaseController implements
             return null;
         }
     }
-
+    //END LEE BAKER GENERATED CODE
+    
+    //START IDE GENERATED CODE
     private TypeofatomicinformationSaveRetrieve getSaveRetrieve() {
         return ejbSaveRetrieve;
     }
@@ -91,7 +97,9 @@ public class TypeofatomicinformationController extends BaseController implements
         }
         return pagination;
     }
-
+    //END IDE GENERATED CODE
+    
+    //START OF IDE MODIFIED CODE BY LEE BAKER 
     public String prepareList() {
         recreateModel();
         itemSelected = false;
@@ -124,7 +132,9 @@ public class TypeofatomicinformationController extends BaseController implements
             return null;
         }
     }
-
+    //END OF IDE MODIFIED CODE BY LEE BAKER 
+    
+    //START IDE GENERATED CODE
     public String prepareEdit() {
         return prepareSelected("Edit");
     }
@@ -139,46 +149,14 @@ public class TypeofatomicinformationController extends BaseController implements
             return null;
         }
     }
-
-    /*  31/08/14 Remarked out never used IDE Code
-    public String destroy() {
-        current = (Typeofatomicinformation) getItems().getRowData();
-        selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
-        performDestroy();
-        recreatePagination();
-        recreateModel();
-        return "List";
-    }
-
-    public String destroyAndView() {
-        performDestroy();
-        recreateModel();
-        updateCurrentItem();
-        if (selectedItemIndex >= 0) {
-            return "View";
-        } else {
-            // all items were removed - go back to list
-            recreateModel();
-            return "List";
-        }
-    }
-
-    private void performDestroy() {
-        try {
-            getSaveRetrieve().remove(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("TypeofatomicinformationDeleted"));
-        } catch (Exception e) {
-            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
-        }
-    }
-    */
-
+    //END IDE GENERATED CODE
 
     /*
     *   09/08/14 @Lee Baker
     *   Code added to delete entity instead of destroying it
     */
-     public String delete() {
+    //START LEE BAKER GENERATED CODE
+    public String delete() {
         String result;
         result = prepareSelected("List");
         if ("List".equals(result)){
@@ -211,8 +189,9 @@ public class TypeofatomicinformationController extends BaseController implements
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
         }
     }
-
-
+    //END LEE BAKER GENERATED CODE
+    
+    //START IDE GENERATED CODE
     private void updateCurrentItem() {
         int count = getSaveRetrieve().countEntityActiveIsCurrentVersion(true, true);
         if (selectedItemIndex >= count) {
@@ -309,5 +288,5 @@ public class TypeofatomicinformationController extends BaseController implements
         }
 
     }
-
 }
+ //START IDE GENERATED CODE

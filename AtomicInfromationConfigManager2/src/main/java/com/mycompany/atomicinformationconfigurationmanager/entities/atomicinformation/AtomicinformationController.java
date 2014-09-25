@@ -28,26 +28,27 @@ import javax.inject.Named;
  *  @author Lee Baker
  *  @version 1.0
  */
-
+//START IDE GENERATED CODE
 @Named("atomicinformationController")
 @SessionScoped
 public class AtomicinformationController extends BaseController implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private Atomicinformation current;
-    private Atomicinformation old;
-    private boolean updating = false;
-    private boolean  itemSelected = false; //Set to true when an item is selected in the List DataTable
-    
-    private DataModel items = null;
+    private Atomicinformation current;// Current Artefactatomicinformation entity that has been selected/viewed/edited/created  
+    private DataModel items = null;// This is affectively the Model part of the MVC pattern
     @EJB
     private com.mycompany.atomicinformationconfigurationmanager.entities.atomicinformation.AtomicinformationSaveRetrieve ejbSaveRetrieve;
     private PaginationHelper pagination;
-    private int selectedItemIndex;
+    private int selectedItemIndex;// Selected entity Index in the DataModel items
+    //END IDE GENERATED CODE
+    
+    //START LEE BAKER GENERATED CODE
+    private Atomicinformation old;// Used to hold a reference to the old version of an Atomicinformation entity when the entity is being updated
+    private boolean updating = false;//Set to true when making changes that update the version of an Atomicinformation entity
+    private boolean  itemSelected = false; //Set to true when an item is selected in the List DataTable
     
     @Inject
     private ProjectController projectController;
-    
 
     public AtomicinformationController() {
     }
@@ -103,11 +104,13 @@ public class AtomicinformationController extends BaseController implements Seria
             return null;
         }
     }
+    //END LEE BAKER GENERATED CODE
 
     public AtomicinformationSaveRetrieve getSaveRetrieve() {
         return ejbSaveRetrieve;
     }
-
+    
+    //START OF IDE MODIFIED CODE BY LEE BAKER 
     public PaginationHelper getPagination() {
         if (pagination == null) {
             pagination = new PaginationHelper(10) {
@@ -170,17 +173,21 @@ public class AtomicinformationController extends BaseController implements Seria
         selectedItemIndex = -1;
         return "/Faces/atomicinformation/Create";
     }
+    //END OF IDE MODIFIED CODE BY LEE BAKER 
     
     /*  @Lee baker
     *   10/08/2014 Added for navigation from  artefactatomicinformation/Create/xhtml
     */
+    //START LEE BAKER GENERATED CODE
     public String prepareCreateFormArtefactAtomicInformation() {
         current = new Atomicinformation();
         current.setIsCurrentVersion(true);
         selectedItemIndex = -1;
         return "/Faces/atomicinformation/CreateFromArtefactAtomicInformation";
     }
+    //END LEE BAKER GENERATED CODE
     
+    //START OF IDE MODIFIED CODE BY LEE BAKER 
     public String create(String returnMethod) {
         try {
             /*  
@@ -216,12 +223,14 @@ public class AtomicinformationController extends BaseController implements Seria
     public String prepareEdit() {
         return prepareSelected("/Faces/atomicinformation/Edit");
     }
-
+    //END OF IDE MODIFIED CODE BY LEE BAKER
+    
     /*
     *   24/08/14 @Lee Baker
     *   When recreationg a new atomicinformation copies details of current atomicinformation to a new
     *   new atomicinformation and set the old one to not current.
     */
+    //START LEE BAKER GENERATED CODE
      public String prepareUpdateVersion(){
         updating = true;
         old = current;
@@ -265,44 +274,13 @@ public class AtomicinformationController extends BaseController implements Seria
             return null;
         }
     }
-    
-    /*   31/08/14 Remarked out never used IDE Code
-    public String destroy() {
-        current = (Atomicinformation) getItems().getRowData();
-        selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
-        performDestroy();
-        recreatePagination();
-        recreateModel();
-        return "List";
-    }
-
-    public String destroyAndView() {
-        performDestroy();
-        recreateModel();
-        updateCurrentItem();
-        if (selectedItemIndex >= 0) {
-            return "View";
-        } else {
-            // all items were removed - go back to list
-            recreateModel();
-            return "List";
-        }
-    }
-
-    private void performDestroy() {
-        try {
-            getSaveRetrieve().remove(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("AtomicinformationDeleted"));
-        } catch (Exception e) {
-            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
-        }
-    }
-    */
+    //END LEE BAKER GENERATED CODE
 
     /*  
     *   08/08/14 @Lee Baker
     *   Code added to disable entity instead of destroying it
-    */   
+    */
+    //START LEE BAKER GENERATED CODE
     public String delete() {
         String result;
         result = prepareSelected("List");
@@ -336,8 +314,9 @@ public class AtomicinformationController extends BaseController implements Seria
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
         }
     }
+    //END LEE BAKER GENERATED CODE
     
-    
+    //START OF IDE MODIFIED CODE BY LEE BAKER 
     private void updateCurrentItem() {
         int count;
         if (projectController.getCurrent() != null){
@@ -364,16 +343,15 @@ public class AtomicinformationController extends BaseController implements Seria
             }
         }
     }
-
+    //END OF IDE MODIFIED CODE BY LEE BAKER 
+    
+    //START IDE GENERATED CODE
     public DataModel getItems() {
         if (items == null){
             items = getPagination().createPageDataModel();
         }
         return items;
-    }
-    /* 
-    *   End of modified IDE code
-    */  
+    }  
 
     public void recreateModel() {
         items = null;
@@ -446,5 +424,5 @@ public class AtomicinformationController extends BaseController implements Seria
         }
 
     }
-
 }
+ //START IDE GENERATED CODE
