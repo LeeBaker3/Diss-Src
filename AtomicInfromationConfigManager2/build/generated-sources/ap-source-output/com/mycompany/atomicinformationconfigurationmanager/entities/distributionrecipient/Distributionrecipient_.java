@@ -8,7 +8,7 @@ import javax.persistence.metamodel.CollectionAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@Generated(value="EclipseLink-2.5.1.v20130918-rNA", date="2014-09-22T23:05:12")
+@Generated(value="EclipseLink-2.5.1.v20130918-rNA", date="2014-10-07T22:18:59")
 @StaticMetamodel(Distributionrecipient.class)
 public class Distributionrecipient_ extends BaseEntity_ {
 
