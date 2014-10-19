@@ -35,7 +35,7 @@ INSERT INTO project (ProjectReference, ProjectName, VersionNumber, IsCurrentVers
 	EntityActive=VALUES(EntityActive);
 
 INSERT INTO project (ProjectReference, ProjectName, VersionNumber, IsCurrentVersion, PreviousVersionReference, EntityActive)
-	VALUES('P003', 'Test Project3 Entity Not Active', 1, true, NULL, false) ON DUPLICATE KEY UPDATE
+	VALUES('P003', 'Test Project3 Entity Active', 1, true, NULL, true) ON DUPLICATE KEY UPDATE
 	ProjectReference=VALUES(ProjectReference), 
 	ProjectName=VALUES(ProjectName), 
 	VersionNumber=VAlUES(VersionNumber), 
@@ -93,6 +93,17 @@ INSERT INTO artefact (`VersionNumber`, `IsCurrentVersion`, `PreviousVersionRefer
 
 INSERT INTO artefact (`VersionNumber`, `IsCurrentVersion`, `PreviousVersionReference`, `EntityActive`, `ArtefactName`, `ArtefactMajorVersionNumber`, `ArtefactMinorVersionNumber`, `ProjectID`) 
 	VALUES (1, true, NULL, true, 'Test Artefact 5 Design Specification', '1', '0', 1)  ON DUPLICATE KEY UPDATE
+	VersionNumber=VALUES(VersionNumber), 
+	IsCurrentVersion=VALUES(IsCurrentVersion), 
+	PreviousVersionReference=VALUES(PreviousVersionReference), 
+	EntityActive=VALUES(EntityActive), 
+	ArtefactName=VALUES(ArtefactName), 
+	ArtefactMajorVersionNumber=VALUES(ArtefactMajorVersionNumber), 
+	ArtefactMinorVersionNumber=VALUES(ArtefactMinorVersionNumber), 
+	ProjectID=VALUES(ProjectID);
+
+INSERT INTO artefact (`VersionNumber`, `IsCurrentVersion`, `PreviousVersionReference`, `EntityActive`, `ArtefactName`, `ArtefactMajorVersionNumber`, `ArtefactMinorVersionNumber`, `ProjectID`) 
+	VALUES (2, true, NULL, true, 'Test Artefact 6 Design Specification', '1', '0', 1)  ON DUPLICATE KEY UPDATE
 	VersionNumber=VALUES(VersionNumber), 
 	IsCurrentVersion=VALUES(IsCurrentVersion), 
 	PreviousVersionReference=VALUES(PreviousVersionReference), 
