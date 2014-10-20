@@ -28,7 +28,6 @@
                     </rich:toolbar>
                     <rich:toolbar>
                         <rich:dropDownMenu rendered="#{projectController.current !=null}" label="#{bundle.DropDownMenuArtefact}">
-                            <rich:menuItem label="#{bundle.MenuItemViewArtefactLink}" action="#{artefactController.prepareView}"/>
                             <rich:menuItem label="#{bundle.MenuItemSaveArtefactLink}" action="#{updateArtefactAtomicInformationLinks.update}"/>
                             <rich:menuItem label="#{bundle.MenuItemListArtefactLink}" action="/Faces/artefact/List" immediate="true"/>
                             <rich:menuItem label="#{bundle.MenuItemUploadArtefactLink}" action="/Faces/upload/Upload" immediate="true"/>

@@ -30,7 +30,6 @@
                     <rich:toolbar>
                         <rich:dropDownMenu rendered="#{projectController.current !=null}" label="#{bundle.DropDownMenuArtefactatomicinformation}">
                             <rich:menuItem label="#{bundle.MenuItemSaveArtefactatomicinformationLink}" action="#{artefactatomicinformationController.create('prepareCreateFromArtefact')}"/>
-                            <rich:menuItem label="#{bundle.MenuItemCreateAtomicArtefacatomicinformationLink}" action="#{atomicinformationController.prepareCreateFormArtefactAtomicInformation}" immediate="true"/>
                             <rich:menuItem label="#{bundle.MenuItemListArtefactatomicinformationLink}" action="#{artefactatomicinformationController.prepareList}" immediate="true"/>
                         </rich:dropDownMenu>
                     </rich:toolbar>

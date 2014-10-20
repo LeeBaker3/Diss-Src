@@ -9,6 +9,8 @@
 -- ArtefactAtomicInfromation
 --
 -- 17/08/14 Updated PreviousVersionReference for all tables to insert Null instead of ''
+--
+-- 12/09/14 Added additional test data
 
 USE `AtomicInformationConfigurationManagerDB`;
 
