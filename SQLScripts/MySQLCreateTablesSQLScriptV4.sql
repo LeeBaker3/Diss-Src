@@ -25,7 +25,7 @@ USE `AtomicInformationConfigurationManagerDB` ;
 CREATE TABLE IF NOT EXISTS `AtomicInformationConfigurationManagerDB`.`Project` (
   `ProjectID` INT NOT NULL AUTO_INCREMENT,
   `ProjectReference` VARCHAR(45) NULL,
-  `ProjectName` VARCHAR(45) NULL,
+  `ProjectName` VARCHAR(45) NOT NULL,
   `VersionNumber` INT NOT NULL,
   `IsCurrentVersion` TINYINT(1) NOT NULL,
   `PreviousVersionReference` INT NULL,
