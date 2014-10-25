@@ -31,7 +31,6 @@
         <Node id="Faces/atomicinformation/Create.xhtml" x="150" y="450" zoom="true"/>
         <Node id="Faces/atomicinformation/View.xhtml" x="1400" y="150" zoom="true"/>
         <Node id="Faces/distributionrecipient/Edit.xhtml" x="87" y="97" zoom="false"/>
-        <Node id="Faces/appentry/MainMenu.xhtml" x="650" y="300" zoom="true"/>
         <Node id="Faces/distributionrecipient/List.xhtml" x="400" y="300" zoom="true"/>
     </Scope>
     <Scope Scope="All Faces Configurations"/>
