@@ -19,7 +19,7 @@ import org.odftoolkit.simple.TextDocument;
 import org.odftoolkit.simple.text.Paragraph;
 
 /**
- *  ScanOdt method. This methods inherits the Scan Class and adds the ability to scan
+ *  ScanOdt Class. This Class inherits the Scan Class and adds the ability to scan
  *  an Open Office Format (ODF) Text Document using the file extension .odt. The class 
  *  uses a reference to an Artefact Entity and a List<> of Atomicinformation entities
  *  for a specific project and searches the Artefact file in the database in an attempt 
